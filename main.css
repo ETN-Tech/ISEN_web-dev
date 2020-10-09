@@ -1,0 +1,33 @@
+html, body {
+    font-family: arial, sans-serif;
+    background-color: #f1faee;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    background-color: #1d3557;
+    padding: 20px 40px;
+}
+.header-logo h1{
+    font-size: 36px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+.header-menu {
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content {
+    position: relative;
+    display: block;
+    max-width: 1200px;
+    background-color: #fff;
+    margin: 0px auto;
+    padding: 40px 60px;
+}
