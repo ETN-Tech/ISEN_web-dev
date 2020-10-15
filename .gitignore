@@ -1,3 +1,5 @@
 # excluded git files
 .DS_store
 .idea/
+
+php/bdd-connexion.php
