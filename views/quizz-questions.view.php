@@ -17,9 +17,11 @@
                     <img src="<?php echo $bdd_quizz['img_url']; ?>" alt="Quizz <?php echo $bdd_quizz['name'] ?>" class="img-fluid quizz-full-img">
                 </div>
 
-                <h1 class="quizz-header-titre">Quizz <?php echo $bdd_quizz['label'] ?></h1>
+                <div class="quizz-header-texte">
+                    <h1 class="quizz-header-titre">Quizz <?php echo $bdd_quizz['label'] ?></h1>
 
-                <p class="quizz-header-desc"><?php echo $bdd_quizz['description']; ?></p>
+                    <h5 class="quizz-header-desc"><?php echo $bdd_quizz['description']; ?></h5>
+                </div>
             </div>
 
             <div class="content">

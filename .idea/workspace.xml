@@ -20,24 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8641951d-5465-4686-bb97-9ec5f644a4b9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/bootstrap.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/quizz-validate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/isen_web-dev.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeles/accounts.php" beforeDir="false" afterPath="$PROJECT_DIR$/modeles/accounts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeles/quizz.php" beforeDir="false" afterPath="$PROJECT_DIR$/modeles/quizz.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quizz.php" beforeDir="false" afterPath="$PROJECT_DIR$/quizz.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/account.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/account.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/quizz-questions.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/quizz-questions.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/quizz.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/quizz.view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +66,7 @@
       <workItem from="1602622405377" duration="7075000" />
       <workItem from="1602677574388" duration="5067000" />
       <workItem from="1602695729347" duration="1552000" />
-      <workItem from="1602755993136" duration="13929000" />
+      <workItem from="1602755993136" duration="15574000" />
     </task>
     <servers />
   </component>
