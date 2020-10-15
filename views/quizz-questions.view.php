@@ -10,50 +10,77 @@
 <body>
     <main>        
         <?php include('views/header.view.php'); ?>
-        
-        <div class="content">
-            <h2>Quizz <?php echo $bdd_quizz['label'] ?></h2>
-            
-            <form method="post" action="#">
-                
-                <div class="form-group">
-                   
-                    <?php foreach($questions as $question) { ?>
-                    
-                    <label for="<?php echo $question['form_id']; ?>"><?php echo $question['question']; ?></label>
-                    
-                    <?php if (in_array($question['type'], ['radio', 'checkbox'])) { ?>
-                    
-                    <div class="form-check">
-                       
-                        <?php foreach($question['propositions'] as $proposition) { ?>
-                        
-                        <input class="form-check-input" type="<?php echo $question['type']; ?>" name="<?php echo $question['name']; ?>" value="<?php echo $question['value']; ?>" id="<?php echo $proposition['form_id']; ?>">
-                        <label class="form-check-label" for="<?php echo $proposition['form_id']; ?>">Default checkbox</label>
-                        
-                        <?php } ?>
-                        
-                    </div>
-                    
-                    <?php } else if ($question['type'] == 'input') { ?>
-                    
-                    <input type="text" class="form-control" id="<?php echo $question['form_id']; ?>" name="<?php echo $question['form_id']; ?>" aria-describedby="<?php echo $question['form_id']; ?>">
-                    
-                    <?php } if (!empty($question['tips'])) { ?>
-                    
-                    <small id="<?php echo $question['form_id']; ?>" class="form-text text-muted"><?php echo $question['tips']; ?></small>
-                    
-                    <?php } } ?>
-                    
+
+        <div class="container">
+            <div class="container quizz-header-img" id="quizz">
+                <div class="row">
+                    <img src="<?php echo $bdd_quizz['img_url']; ?>" alt="Quizz <?php echo $bdd_quizz['name'] ?>" class="img-fluid quizz-full-img">
                 </div>
-                
-                <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
-            </form>
-            
+
+                <h1 class="quizz-header-titre">Quizz <?php echo $bdd_quizz['label'] ?></h1>
+
+                <p class="quizz-header-desc"><?php echo $bdd_quizz['description']; ?></p>
+            </div>
+
+            <div class="content">
+
+                <?php
+                if (isset($quizz_error)) {
+                    if (!empty($quizz_error)) {
+                        ?>
+                        <div class="alert alert-danger" role="alert">Incorrect fields (question(s) <?php echo join(", ", $quizz_error) ?>). Answer all questions and try again.</div>
+                        <br>
+                    <?php } else { ?>
+                    <div class="alert alert-<?php echo $quizz_result_type; ?>" role="alert">
+                        <h4><?php echo $quizz_result_title; ?></h4>
+                        <p>Score : <?php echo $quizz_score .'/'. $quizz_max_score; ?></p>
+                        <a href="#quizz" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
+                    </div>
+                    <br>
+                <?php } } ?>
+
+                <form method="post" action="#quizz" class="needs-validation" novalidate>
+
+                    <?php foreach($questions as $question) { ?>
+
+                        <div class="form-group">
+
+                            <label for="<?php echo $question['form_id']; ?>"><?php echo $question['id'] .'. '. $question['question']; ?></label><br>
+
+                            <?php
+                            if (in_array($question['type'], ['radio', 'checkbox'])) {
+                                foreach($question['propositions'] as $proposition) {
+                                    ?>
+                                        <div class="custom-control custom-<?php echo $question['type']; ?> custom-control-inline">
+                                            <input class="custom-control-input" type="<?php echo $question['type']; ?>" name="<?php echo $proposition['name']; ?>" value="<?php echo $proposition['value']; ?>" id="<?php echo $proposition['form_id']; ?>" <?php echo $proposition['checked']; ?> <?php echo $proposition['required']; ?>>
+                                            <label class="custom-control-label" for="<?php echo $proposition['form_id']; ?>"><?php echo $proposition['proposition']; ?></label>
+                                        </div>
+                                    <?php
+                                }
+                            } else if ($question['type'] == 'input') {
+                            ?>
+                                <input type="text" class="form-control" id="<?php echo $question['form_id']; ?>" name="<?php echo $question['form_id']; ?>" value="<?php echo $question['value']; ?>" aria-describedby="<?php echo $question['form_id']; ?>" required>
+                                <div class="invalid-feedback">Please answer the question.</div>
+                                <?php
+                            }
+                            if (!empty($question['tips'])) {
+                            ?>
+                                <small id="<?php echo $question['form_id']; ?>" class="form-text text-muted"><?php echo $question['tips']; ?></small>
+                            <?php } ?>
+
+                        </div><br>
+
+                    <?php } ?>
+
+                    <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
+                </form>
+
+            </div>
         </div>
     </main>
     
     <?php include('views/bootstrap-scripts.view.php'); ?>
+    <script type="application/javascript" src="/js/quizz-validate.js"></script>
 </body>
 
 </html>

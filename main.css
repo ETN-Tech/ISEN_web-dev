@@ -11,7 +11,6 @@ header {
     padding: 20px 40px;
 }
 .header-logo h1{
-    font-size: 36px;
     color: #fff;
     text-transform: uppercase;
     text-align: center;
@@ -30,4 +29,35 @@ header {
     background-color: #fff;
     margin: 0px auto;
     padding: 40px 60px;
+}
+
+.quizz-header-img {
+    position: relative;
+    color: #fff;
+    text-shadow: 1px 2px 10px rgba(0,0,0,0.8);
+}
+.quizz-header-titre{
+    position: absolute;
+    top: 6vw;
+    width: calc(100% - 30px);
+    font-size: 4rem;
+    text-align: center;
+}
+.quizz-header-desc {
+    position: absolute;
+    top: 11vw;
+    width: calc(100% - 30px);
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.quizz-full-img {
+    width: 100%;
+    max-height: 20vw;
+    object-fit: cover;
+}
+
+.btn-alert-right {
+    position: absolute;
+    right: 10px;
 }

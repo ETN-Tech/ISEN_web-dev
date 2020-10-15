@@ -15,45 +15,151 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
     // verify if the quizz exists
     if ($bdd_quizz) {
         $questions = get_quizz_questions($bdd_quizz['id'])->fetchAll();
-        
+
+        // check if quizz form is sent
+        if (isset($_POST['form-quizz'])) {
+            $quizz_error = array();
+            $quizz_wrong = array();
+            $quizz_base_score = 10 / count($questions);
+            $quizz_score = count($questions) * $quizz_base_score;
+            $quizz_max_score = count($questions) * $quizz_base_score;
+        }
+
         // format questions
-        foreach($questions as $key => $question) {
-            
-            // check if it's input type
-            if ($question['type'] == 'input') {
-                
-                // get the answer for that question
-                $answer = get_question_input($question['id'])->fetch();
-                
-                $questions[$key]['answer'] = $answer;
-                // add a form_id
-                $questions[$key]['form_id'] = 'input'. $question['id'];
+        foreach($questions as $key_q => $question) {
+
+            // if quizz sent, correction
+            if (isset($quizz_error)) {
+                if (in_array($question['type'], ['input', 'radio'])) {
+
+                    // verify fields exist if input/radio type
+                    if (!isset($_POST[$question['id']]) || empty($_POST[$question['id']])) {
+                        array_push($quizz_error, $question['id']);
+                    }
+                    else {
+                        // get user answer
+                        $user_answer = htmlspecialchars($_POST[$question['id']]);
+
+                        if ($question['type'] == 'input') {
+                            // get the answer for that question
+                            $answer = get_question_input($question['id'])->fetch()['answer'];
+
+                            // check if answer is incorrect
+                            if (strtolower($answer) != trim(strtolower($user_answer))) {
+                                $quizz_score -= $quizz_base_score;
+                                array_push($quizz_wrong, $question['id']);
+                            }
+                        }
+                        else if ($question['type'] == 'radio') {
+                            // get proposition selected by user
+                            $proposition = get_proposition($user_answer)->fetch();
+
+                            // check if proposition is incorrect
+                            if (!$proposition['is_correct']) {
+                                $quizz_score -= $quizz_base_score;
+                                array_push($quizz_wrong, $question['id']);
+                            }
+                        }
+                    }
+                }
+                // if input type che
+                else if ($question['type'] == 'checkbox') {
+                    // get all propositions (choices) for that question
+                    $propositions = get_question_radio_checkbox($question['id'])->fetchAll();
+
+                    // check each proposition
+                    foreach ($propositions as $key_p => $proposition) {
+
+                        // check if user ticked this proposition
+                        if (isset($_POST[$question['id'] .'-'. $proposition['id']])) {
+                            // check if proposition is incorrect
+                            if (!$proposition['is_correct']) {
+                                $quizz_score -= $quizz_base_score / count($propositions);
+                                array_push($quizz_wrong, $question['id'] .'-'. $proposition['id']);
+                            }
+                        }
+                        // if user didn't tick the proposition
+                        else {
+                            // check if proposition is correct
+                            if ($proposition['is_correct']) {
+                                $quizz_score -= $quizz_base_score / count($propositions);
+                            }
+                        }
+                    }
+                }
             }
-            
+
             // check if it's radio/checkbox type
-            else if (in_array($question['type'], ['radio', 'checkbox'])) {
-                
+            if (in_array($question['type'], ['radio', 'checkbox'])) {
+
                 // get all propositions (choices) for that question
                 $propositions = get_question_radio_checkbox($question['id'])->fetchAll();
-                
-                // format fields for quizz form
-                foreach ($propositions as $key => $proposition) {
-                    
-                    // add a form_id
-                    $propositions[$key]['form_id'] = $question['type'].$proposition['id'];
-                    
-                    // add a name field
-                    $propositions[$key]['name'] = ($question['type'] == 'radio') ? 'radio'.$question['id'] : $question['type'].$proposition['id'];
-                    
-                    // add a value field
-                    $propositions[$key]['value'] = ($question['type'] == 'radio') ? 'radio'.$proposition['id'] : '';
+
+                // go throw all propositions
+                foreach ($propositions as $key_p => $proposition) {
+                    // add and format fields for quizz
+                    $propositions[$key_p]['form_id'] = $question['type'].$proposition['id'];
+                    $propositions[$key_p]['name'] = ($question['type'] == 'radio') ? $question['id'] : $question['id'] .'-'. $proposition['id'];
+                    $propositions[$key_p]['value'] = $proposition['id'];
+                    $propositions[$key_p]['required'] = ($question['type'] == 'radio') ? 'required' : '';
+                    // set default value
+                    $propositions[$key_p]['checked'] = '';
+
+                    // if quizz sent, correction
+                    if (isset($quizz_error)) {
+
+                        if ($question['type'] == 'radio' && isset($_POST[$question['id']])) {
+                            // get question value (id of proposition chosen)
+                            $user_value = htmlspecialchars($_POST[$question['id']]);
+
+                            // if value inputed by user correspond to this proposition_id, proposition is checked
+                            $propositions[$key_p]['checked'] = ($user_value == $proposition['id']) ? 'checked' : '';
+                        }
+                        else if ($question['type'] == 'checkbox') {
+                            // if field [question_id]-[proposition_id] exists, proposition is checked
+                            $propositions[$key_p]['checked'] = (isset($_POST[$question['id'].'-'.$proposition['id']])) ? 'checked' : '';
+                        }
+                    }
                 }
-                
-                $questions[$key]['propositions'] = $propositions;
+                // ajouter les propositions à la question
+                $questions[$key_q]['propositions'] = $propositions;
             }
-            
+            // check if it's an input type
+            else if ($question['type'] == 'input') {
+                // check if quizz sent and question_id valid
+                if (isset($quizz_error) && isset($_POST[$question['id']]) && !empty($_POST[$question['id']])) {
+                    // get user input
+                    $user_input = htmlspecialchars($_POST[$question['id']]);
+
+                    $questions[$key_q]['value'] = $user_input;
+                } else {
+                    $questions[$key_q]['value'] = '';
+                }
+            }
             // add a form_id
-            $question['form_id'] = 'question'. $question['id'];
+            $questions[$key_q]['form_id'] = $question['id'];
+        }
+
+        // if quizz is sent
+        if (isset($quizz_error)) {
+            // set prepentation according to the score
+            if ($quizz_score >= 7) {
+                $quizz_result_title = "Congratulations !";
+                $quizz_result_type = "success";
+            }
+            else if ($quizz_score >= 4) {
+                $quizz_result_title = "Quite good !";
+                $quizz_result_type = "warning";
+            }
+            else {
+                $quizz_result_title = "Keep training !";
+                $quizz_result_type = "danger";
+            }
+
+            // if no error, form is disabled
+            $quizz_disabled = ($quizz_error == 0) ? 'disabled' : '';
+        } else {
+            $quizz_disabled = '';
         }
     }
     else {
