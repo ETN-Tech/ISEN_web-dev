@@ -36,7 +36,7 @@
                     <div class="alert alert-<?php echo $quizz_result_type; ?>" role="alert">
                         <h4><?php echo $quizz_result_title; ?></h4>
                         <p>Score : <?php echo $quizz_score .'/'. $quizz_max_score; ?></p>
-                        <a href="#quizz" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
+                        <a href="" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
                     </div>
                     <br>
                 <?php } } ?>
