@@ -2,14 +2,14 @@
 <html lang="fr">
 
 <head>
-    <?php include('views/bootstrap-head.view.php'); ?>
+    <?php include('../php/views/bootstrap-head.view.php'); ?>
     <link rel="stylesheet" href="/main.css">
     <title>Home - That Quizz</title>
 </head>
 
 <body>
     <main>        
-        <?php include('views/header.view.php'); ?>
+        <?php include('../php/views/header.view.php'); ?>
 
         <div class="container">
             <div class="content">
@@ -47,7 +47,7 @@
         </div>
     </main>
     
-    <?php include('views/bootstrap-scripts.view.php'); ?>
+    <?php include('../php/views/bootstrap-scripts.view.php'); ?>
 </body>
 
 </html>
