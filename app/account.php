@@ -1,8 +1,8 @@
 <?php
 
-require_once('php/session-locale.php');
+require_once('../php/session-locale.php');
 
-require_once('modeles/accounts.php');
+require_once('../php/models/accounts.php');
 
 
 // verify user connected
@@ -27,4 +27,4 @@ $full_name = $account['surname'] .' '. $account['name'];
 $last_connexion = ucfirst(strftime('%a %e %B %Y - %kh%M', strtotime($account['last_connexion'])));
 
 
-require_once('views/account.view.php');
+require_once('../php/views/account.view.php');

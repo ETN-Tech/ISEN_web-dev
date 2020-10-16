@@ -1,8 +1,8 @@
 <?php
 
-require_once('php/session-locale.php');
+require_once('../php/session-locale.php');
 
-require_once('modeles/quizz.php');
+require_once('../php/models/quizz.php');
 
 
 // verify if quizz page requested
@@ -168,12 +168,12 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
     }
     
     // view quizz questions page
-    require_once('views/quizz-questions.view.php');
+    require_once('../php/views/quizz-questions.view.php');
 }
 else {
     
     $quizzes = get_quizzes()->fetchAll();
     
     // view page to choose a quizz
-    require_once('views/quizz.view.php');
+    require_once('../php/views/quizz.view.php');
 }

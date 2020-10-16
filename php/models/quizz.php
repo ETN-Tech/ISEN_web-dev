@@ -1,6 +1,6 @@
 <?php
 
-require_once('php/bdd-connexion.php');
+require_once('../php/bdd-connexion.php');
 
 // get quizzes informations
 function get_quizzes() {

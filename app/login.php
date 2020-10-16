@@ -1,8 +1,8 @@
 <?php
 
-require_once('php/session-locale.php');
+require_once('../php/session-locale.php');
 
-require_once('modeles/accounts.php');
+require_once('../php/models/accounts.php');
 
 
 // redirect to account if user is connected
@@ -42,4 +42,4 @@ if (isset($_POST['form-login'])) {
 }
 
 
-require_once('views/login.view.php');
+require_once('../php/views/login.view.php');

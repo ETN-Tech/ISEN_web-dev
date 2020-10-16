@@ -1,6 +1,7 @@
 # excluded git files
 .DS_store
-.idea/
 .env
+
+/.idea/
 
 php/bdd-env.php

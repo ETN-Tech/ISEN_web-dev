@@ -1,8 +1,8 @@
 <?php
 
-require_once('php/session-locale.php');
+require_once('../php/session-locale.php');
 
-require_once('modeles/accounts.php');
+require_once('../php/models/accounts.php');
 
 
 // test if user connected
@@ -17,4 +17,4 @@ if (isset($_SESSION['user_id'])) {
 }
 
 
-require_once('views/home.view.php');
+require_once('../php/views/home.view.php');
