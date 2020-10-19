@@ -47,27 +47,27 @@
 
                         <div class="form-group">
 
-                            <label for="<?php echo $question['form_id']; ?>"><?php echo $question['id'] .'. '. $question['question']; ?></label><br>
+                            <label for="<?php echo $question['id']; ?>"><?php echo $question['id'] .'. '. $question['question']; ?></label><br>
 
                             <?php
                             if (in_array($question['type'], ['radio', 'checkbox'])) {
                                 foreach($question['propositions'] as $proposition) {
                                     ?>
                                         <div class="custom-control custom-<?php echo $question['type']; ?> custom-control-inline">
-                                            <input class="custom-control-input" type="<?php echo $question['type']; ?>" name="<?php echo $proposition['name']; ?>" value="<?php echo $proposition['value']; ?>" id="<?php echo $proposition['form_id']; ?>" <?php echo $proposition['checked']; ?> <?php echo $proposition['required']; ?>>
-                                            <label class="custom-control-label" for="<?php echo $proposition['form_id']; ?>"><?php echo $proposition['proposition']; ?></label>
+                                            <input class="custom-control-input" type="<?php echo $question['type']; ?>" name="<?php echo $proposition['name']; ?>" value="<?php echo $proposition['value']; ?>" id="<?php echo $proposition['id']; ?>" <?php echo $proposition['checked']; ?> <?php echo $proposition['required']; ?>>
+                                            <label class="custom-control-label" for="<?php echo $proposition['id']; ?>"><?php echo $proposition['proposition']; ?></label>
                                         </div>
                                     <?php
                                 }
                             } else if ($question['type'] == 'input') {
                             ?>
-                                <input type="text" class="form-control" id="<?php echo $question['form_id']; ?>" name="<?php echo $question['form_id']; ?>" value="<?php echo $question['value']; ?>" aria-describedby="<?php echo $question['form_id']; ?>" required>
+                                <input type="text" class="form-control" id="<?php echo $question['id']; ?>" name="<?php echo $question['id']; ?>" value="<?php echo $question['value']; ?>" aria-describedby="<?php echo $question['id']; ?>" required>
                                 <div class="invalid-feedback">Please answer the question.</div>
                                 <?php
                             }
                             if (!empty($question['tips'])) {
                             ?>
-                                <small id="<?php echo $question['form_id']; ?>" class="form-text text-muted"><?php echo $question['tips']; ?></small>
+                                <small id="<?php echo $question['id']; ?>" class="form-text text-muted"><?php echo $question['tips']; ?></small>
                             <?php } ?>
 
                         </div><br>

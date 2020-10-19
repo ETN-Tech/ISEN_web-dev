@@ -62,7 +62,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                         }
                     }
                 }
-                // if input type che
+                // if input type chekbox
                 else if ($question['type'] == 'checkbox') {
                     // get all propositions (choices) for that question
                     $propositions = get_question_radio_checkbox($question['id'])->fetchAll();
@@ -98,7 +98,6 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                 // go throw all propositions
                 foreach ($propositions as $key_p => $proposition) {
                     // add and format fields for quizz
-                    $propositions[$key_p]['form_id'] = $question['type'].$proposition['id'];
                     $propositions[$key_p]['name'] = ($question['type'] == 'radio') ? $question['id'] : $question['id'] .'-'. $proposition['id'];
                     $propositions[$key_p]['value'] = $proposition['id'];
                     $propositions[$key_p]['required'] = ($question['type'] == 'radio') ? 'required' : '';
@@ -136,8 +135,6 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                     $questions[$key_q]['value'] = '';
                 }
             }
-            // add a form_id
-            $questions[$key_q]['form_id'] = $question['id'];
         }
 
         // if quizz is sent
