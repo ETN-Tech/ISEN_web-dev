@@ -1,7 +1,5 @@
 <?php
 
-require_once('../php/session-locale.php');
-
 require_once('../php/models/accounts.php');
 
 
@@ -42,4 +40,4 @@ if (isset($_POST['form-login'])) {
 }
 
 
-require_once('../php/views/login.view.php');
+require_once('../php/views/login.php');
