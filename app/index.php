@@ -1,6 +1,6 @@
 <?php
 
-require_once("php/init.php");
+require_once("../php/init.php");
 
 $url = '';
 
@@ -22,15 +22,6 @@ else if (in_array($url, ['home', 'quizz', 'login', 'account'])) {
 }
 else {
     $controller = '404';
-}
-
-
-// redirect user wether he is connected or not
-if (isset($_SESSION['user_id'])) {
-    header('Location: account.php');
-}
-else {
-    header('Location: home.php');
 }
 
 // add content in buffer
