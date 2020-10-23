@@ -33,7 +33,7 @@
                 <label for="<?php echo $question['id']; ?>"><?php echo $question['id'] .'. '. $question['question']; ?></label><br>
 
                 <?php
-                if (in_array($question['type'], ['radio', 'checkbox'])) {
+                if (in_array($question['type'], ['radio', 'checkbox', 'select'])) {
                     foreach($question['propositions'] as $proposition) {
                         ?>
                             <div class="custom-control custom-<?php echo $question['type']; ?> custom-control-inline">
