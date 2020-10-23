@@ -2,13 +2,13 @@
 
 require_once('../php/models/accounts.php');
 
+$meta_title = "Login";
 
 // redirect to account if user is connected
 if (isset($_SESSION['user_id'])) {
     header('Location: account.php');
     die();
 }
-
 
 // gérer la connexion
 if (isset($_POST['form-login'])) {

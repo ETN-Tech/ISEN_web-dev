@@ -2,21 +2,13 @@
 
 require_once('../php/models/accounts.php');
 
+$meta_title = "Account";
 
 // verify user connected
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     die();
 }
-
-
-// deconnect user on demand
-if (isset($_GET['logout'])) {
-    unset($_SESSION['user_id']);
-    header('Location: login.php');
-    die();
-}
-
 
 $account = get_account($_SESSION['user_id'])->fetch();
 
