@@ -3,7 +3,7 @@
 
 <head>
     <?php include('../php/views/bootstrap-head.view.php'); ?>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Home - That Quizz</title>
 </head>
 

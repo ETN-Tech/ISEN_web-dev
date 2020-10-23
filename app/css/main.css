@@ -45,10 +45,10 @@ header {
 }
 
 .quizz-header-titre{
-    font-size: inherit * 2;
+    font-size: inherit;
 }
 .quizz-header-desc {
-    font-size: inherit * 2;
+    font-size: inherit;
 }
 
 .quizz-full-img {
