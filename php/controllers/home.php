@@ -1,7 +1,5 @@
 <?php
 
-require_once('../php/session-locale.php');
-
 require_once('../php/models/accounts.php');
 
 
@@ -17,4 +15,4 @@ if (isset($_SESSION['user_id'])) {
 }
 
 
-require_once('../php/views/home.view.php');
+require_once('../php/views/home.php');
