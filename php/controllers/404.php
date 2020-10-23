@@ -1,6 +1,6 @@
 <?php
 
-require_once('../php/models/accounts.php');
+require_once('../php/models/account.php');
 
 $meta_title = "Page not found - 404";
 
