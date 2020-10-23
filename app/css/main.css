@@ -31,30 +31,13 @@ header {
     padding: 40px 60px;
 }
 
-.quizz-header-img {
-    position: relative;
-    color: #fff;
-    text-shadow: 1px 2px 10px rgba(0,0,0,0.8);
+.quizz-header-overlay{
+    margin: 5rem 0;
 }
-.quizz-header-texte{
-    position: absolute;
-    top: 0;
-    width: calc(100% - 30px);
-    text-align: center;
-    margin: 7vw 0;
-}
-
-.quizz-header-titre{
-    font-size: inherit;
-}
-.quizz-header-desc {
-    font-size: inherit;
-}
-
 .quizz-full-img {
     object-fit: cover;
     width: 100%;
-    height: 20vw;
+    height: 20rem;
     min-height: 10rem;
 }
 
