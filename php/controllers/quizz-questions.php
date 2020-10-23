@@ -1,6 +1,8 @@
 <?php
 
 require_once('../php/models/quizz.php');
+require_once('../php/models/question.php');
+require_once('../php/models/proposition.php');
 
 // verify if quizz page requested
 if (!isset($_GET['q']) || empty($_GET['q'])) {
@@ -8,31 +10,31 @@ if (!isset($_GET['q']) || empty($_GET['q'])) {
     die();
 }
 
-$quizz_name = htmlspecialchars($_GET['q']);
-
-$bdd_quizz = get_quizz($quizz_name)->fetch();
+$bdd_quizz = new Quizz();
+$quizz_exist = $bdd_quizz->getByName(htmlspecialchars($_GET['q']));
 
 // verify if the quizz exists
-if ($bdd_quizz) {
+if (!$quizz_exist) {
     header('Location: ?url=quizz');
     die();
 }
 
-$meta_title = "Quizz ". $bdd_quizz['title'];
+$meta_title = "Quizz ". $bdd_quizz->title;
 
-$questions = get_quizz_questions($bdd_quizz['id'])->fetchAll();
+$bdd_questions = new Question();
+$bdd_questions->getByQuizzId($bdd_quizz->id);
 
 // check if quizz form is sent
 if (isset($_POST['form-quizz'])) {
     $quizz_error = array();
     $quizz_wrong = array();
-    $quizz_base_score = 10 / count($questions);
-    $quizz_score = count($questions) * $quizz_base_score;
-    $quizz_max_score = count($questions) * $quizz_base_score;
+    $quizz_base_score = 10 / count($bdd_questions);
+    $quizz_score = count($bdd_questions) * $quizz_base_score;
+    $quizz_max_score = count($bdd_questions) * $quizz_base_score;
 }
 
 // format questions
-foreach($questions as $key_q => $question) {
+foreach($bdd_questions as $key_q => $question) {
 
     // if quizz sent, correction
     if (isset($quizz_error)) {

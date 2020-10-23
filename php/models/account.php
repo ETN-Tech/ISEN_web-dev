@@ -9,17 +9,6 @@ class Account {
     public $email;
     public $last_connexion;
 
-    // constructor
-    public function __constructor($id, $username, $password_hash, $name, $surname, $email, $last_connexion) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password_hash = $password_hash;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->email = $email;
-        $this->last_connexion = $last_connexion;
-    }
-
     // get full surname and name
     public function getFullname() {
         return $this->surname.' '.$this->name;
@@ -27,12 +16,12 @@ class Account {
 
     // get account by id
     public function getById($id) {
-        $this->executeGetBy('id', $id);
+        return $this->executeGetBy('id', $id);
     }
 
     // get account by username
     public function getByUsername($username) {
-        $this->executeGetBy('username', $username);
+        return $this->executeGetBy('username', $username);
     }
 
     // execute a request and fill
@@ -52,6 +41,9 @@ class Account {
             $this->surname = $bdd_account['surname'];
             $this->email = $bdd_account['email'];
             $this->last_connexion = $bdd_account['last_connexion'];
+            return true;
+        } else {
+            return false;
         }
     }
 

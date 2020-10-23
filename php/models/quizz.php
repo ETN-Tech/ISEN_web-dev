@@ -1,60 +1,64 @@
 <?php
 
-// get quizzes informations
-function get_quizzes() {
-    global $bdd;
-    
-    $get_quizzes = $bdd->query('SELECT * FROM quizzes');
-    
-    return $get_quizzes;
+class Quizz {
+    public $id;
+    public $name;
+    public $title;
+    public $description;
+    public $img_url;
+
+    // get all quizzes infos and return them
+    public function getQuizzes() {
+        global $bdd;
+
+        $get_quizzes = $bdd->query('SELECT * FROM quizzes');
+
+        $bdd_quizzes = $get_quizzes->fetchAll();
+        $quizzes = array();
+
+        // create Quizz objects for each quizz
+        foreach ($bdd_quizzes as $bdd_quizz) {
+            $quizz = new Quizz();
+
+            // convert array to object
+            foreach ($bdd_quizz  as $key => $value) {
+                $quizz->$key = $value;
+            }
+            // add object to return table
+            array_push($quizzes, $quizz);
+        }
+        return $quizzes;
+    }
+
+    // get account by id
+    public function getById($id) {
+        return $this->executeGetBy('id', $id);
+    }
+
+    // get account by name
+    public function getByName($name) {
+        return $this->executeGetBy('name', $name);
+    }
+
+    // execute a request and fill fields
+    private function executeGetBy($key, $value) {
+        global $bdd;
+
+        $get_account = $bdd->prepare('SELECT * FROM quizzes WHERE '. $key .' = ?');
+        $get_account->execute(array($value));
+
+        $bdd_account = $get_account->fetch();
+
+        if ($bdd_account) {
+            $this->id = $bdd_account['id'];
+            $this->name = $bdd_account['name'];
+            $this->title = $bdd_account['title'];
+            $this->description = $bdd_account['description'];
+            $this->img_url = $bdd_account['img_url'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
-// get quizz informations by name
-function get_quizz($quizz_name) {
-    global $bdd;
-    
-    $get_quizz = $bdd->prepare('SELECT * FROM quizzes WHERE name = ?');
-    $get_quizz->execute(array($quizz_name));
-    
-    return $get_quizz;
-}
-
-// get quizz questions
-function get_quizz_questions($quizz_id) {
-    global $bdd;
-    
-    $get_quizz_questions = $bdd->prepare('SELECT * FROM quizz_questions WHERE quizz_id = ?');
-    $get_quizz_questions->execute(array($quizz_id));
-
-    return $get_quizz_questions;
-}
-
-// get answer for quizz question of type input
-function get_question_input($question_id) {
-    global $bdd;
-    
-    $get_questions_input = $bdd->prepare('SELECT * FROM quizz_questions_input WHERE quizz_question_id = ?');
-    $get_questions_input->execute(array($question_id));
-
-    return $get_questions_input;
-}
-
-// get propositions for quizz question of types radio/checkbox
-function get_question_radio_checkbox($question_id) {
-    global $bdd;
-    
-    $get_questions_radio_checkbox = $bdd->prepare('SELECT * FROM quizz_questions_radio_checkbox WHERE quizz_question_id = ?');
-    $get_questions_radio_checkbox->execute(array($question_id));
-
-    return $get_questions_radio_checkbox;
-}
-
-// get proposition by id
-function get_proposition($proposition_id) {
-    global $bdd;
-
-    $get_proposition = $bdd->prepare('SELECT * FROM quizz_questions_radio_checkbox WHERE id = ?');
-    $get_proposition->execute(array($proposition_id));
-
-    return $get_proposition;
-}

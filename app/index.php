@@ -26,7 +26,7 @@ $url = filter_var(ltrim(rtrim($url, '/'), '/'), FILTER_SANITIZE_URL);
 if ($url == '') {
     $controller = 'home';
 }
-else if (in_array($url, ['home', 'quizz', 'account', 'login', 'logout'])) {
+else if (in_array($url, ['home', 'quizz', 'quizz-questions', 'account', 'login', 'logout'])) {
     $controller = $url;
 }
 else {
