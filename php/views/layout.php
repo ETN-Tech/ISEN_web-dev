@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <title>Account</title>
+    <title><?php echo $meta_title; ?></title>
 </head>
 
 <body>
@@ -17,19 +17,17 @@
             </div>
             <div class="header-menu container">
                 <div class="row justify-content-md-center">
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="/home.php">Home</a></div>
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="/quizz.php">Quizz</a></div>
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="/account.php">Account</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=home">Home</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=quizz">Quizz</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=account">Account</a></div>
                 </div>
             </div>
         </header>
 
         <div class="container">
-            <div class="content">
 
-                <?php echo $content; ?>
+            <?php echo $content; ?>
 
-            </div>
         </div>
     </main>
 

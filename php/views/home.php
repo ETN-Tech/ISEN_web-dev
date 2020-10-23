@@ -1,31 +1,32 @@
+    <div class="content">
+    <h2>Welcome to That Quizz</h2>
 
-<h2>Welcome to That Quizz</h2>
+    <p>Find awesome quizz !</p>
 
-<p>Find awesome quizz !</p>
+    <br><br>
 
-<br><br>
+    <h3>Start learning</h3>
 
-<h3>Start learning</h3>
+    <p>Take a quizz and start learning new things.</p>
 
-<p>Take a quizz and start learning new things.</p>
+    <a href="?url=quizz" class="btn btn-info">Find a quizz</a>
 
-<a href="/quizz.php" class="btn btn-info">Find a quizz</a>
+    <br><br><br><br>
 
-<br><br><br><br>
+    <?php if($user_connected) { ?>
 
-<?php if($user_connected) { ?>
-
-<div class="row">
-    <div class="col-6">
-        <div class="card border-light mb-3">
-            <div class="card-header">Account connected</div>
-            <div class="card-body text-secondary">
-                <h5 class="card-title"><?php echo $full_name; ?></h5>
-                <p class="card-text"><?php echo $account['email']; ?></p>
-                <a href="/account.php" class="btn btn-outline-secondary">Manage account</a>
+    <div class="row">
+        <div class="col-6">
+            <div class="card border-light mb-3">
+                <div class="card-header">Account connected</div>
+                <div class="card-body text-secondary">
+                    <h5 class="card-title"><?php echo $full_name; ?></h5>
+                    <p class="card-text"><?php echo $account['email']; ?></p>
+                    <a href="?url=account" class="btn btn-outline-secondary">Manage account</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php } ?>
+    <?php } ?>
+</div>
