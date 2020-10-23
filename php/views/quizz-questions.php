@@ -1,19 +1,6 @@
-
-<div class="container quizz-header-img" id="quizz">
-    <div class="row">
-        <img src="<?php echo $bdd_quizz['img_url']; ?>" alt="Quizz <?php echo $bdd_quizz['name'] ?>" class="img-fluid quizz-full-img">
-    </div>
-
-    <div class="quizz-header-texte">
-        <h1 class="quizz-header-titre">Quizz <?php echo $bdd_quizz['label'] ?></h1>
-
-        <h5 class="quizz-header-desc"><?php echo $bdd_quizz['description']; ?></h5>
-    </div>
-</div>
-
-<div class="card bg-dark text-white">
+<div class="card border-0 bg-dark text-white text-center">
     <img src="<?php echo $bdd_quizz['img_url']; ?>" alt="Quizz <?php echo $bdd_quizz['name'] ?>" class="img-fluid quizz-full-img">
-    <div class="card-img-overlay">
+    <div class="card-img-overlay align-middle quizz-header-overlay">
         <h1 class="card-title">Quizz <?php echo $bdd_quizz['label'] ?></h1>
 
         <h5 class="card-text"><?php echo $bdd_quizz['description']; ?></h5>
@@ -72,5 +59,6 @@
 
         <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
     </form>
-
 </div>
+
+<script type="application/javascript" src="js/quizz-validate.js"></script>

@@ -1,6 +1,6 @@
 <?php
 
-require_once('../php/models/accounts.php');
+require_once('../php/models/account.php');
 
 $meta_title = "Home";
 
@@ -8,9 +8,10 @@ $meta_title = "Home";
 if (isset($_SESSION['user_id'])) {
     $user_connected = true;
     
-    $account = get_account($_SESSION['user_id'])->fetch();
+    $bdd_account = new Account();
+    $bdd_account->getById($_SESSION['user_id']);
     
-    $full_name = $account['surname'] .' '. $account['name'];
+    $full_name = $bdd_account->getFullname();
 } else {
     $user_connected = false;
 }
