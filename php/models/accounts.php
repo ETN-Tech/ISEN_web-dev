@@ -1,8 +1,5 @@
 <?php
 
-require_once('../php/bdd-connexion.php');
-
-
 // get account informations by user_id
 function get_account($user_id) {
     global $bdd;
