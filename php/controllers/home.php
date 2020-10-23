@@ -2,6 +2,7 @@
 
 require_once('../php/models/accounts.php');
 
+$meta_title = "Home";
 
 // test if user connected
 if (isset($_SESSION['user_id'])) {

@@ -2,6 +2,8 @@
 
 require_once('../php/models/quizz.php');
 
+$meta_title = "Quizz";
+
 // verify if quizz page requested
 if (isset($_GET['q']) && !empty($_GET['q'])) {
     
@@ -157,7 +159,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
         }
     }
     else {
-        header('Location: quizz.php');
+        header('Location: ?url=quizz');
         die();
     }
     
