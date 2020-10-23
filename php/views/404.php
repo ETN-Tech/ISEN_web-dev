@@ -1,9 +1,1 @@
-<h2>Page not found</h2>
-
-<br><br>
-
-<h3>Start learning</h3>
-
-<p>Take a quizz and start learning new things.</p>
-
-<a href="/quizz.php" class="btn btn-info">Find a quizz</a>
+<div class="content">    <h1>Page not found <span class="badge badge-secondary">404</span></h1></h1>    <br><br>    <div class="card w-50 bg-light">        <div class="card-body">            <h5 class="card-title">Start learning</h5>            <p class="card-text">Take a quizz and start learning new things.</p>            <a href="/quizz.php" class="btn btn-info">Find a quizz</a>        </div>    </div></div>
