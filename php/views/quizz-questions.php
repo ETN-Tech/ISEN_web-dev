@@ -24,7 +24,7 @@
         <br>
     <?php } } ?>
 
-    <form method="post" action="#quizz" class="eeds-validation" novalidate>
+    <form method="post" action="#quizz" class="needs-validation" novalidate>
 
         <fieldset <?php echo $quizz_disabled; ?>>
 
