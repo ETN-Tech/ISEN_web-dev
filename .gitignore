@@ -5,3 +5,4 @@
 /.idea/
 
 php/bdd-env.php
+app/test.php
