@@ -9,17 +9,20 @@
 
 <div class="content">
 
-    <?php if (isset($quizz_error) && !empty($quizz_error)) { ?>
-        <div class="alert alert-danger" role="alert">Incorrect fields (question(s) <?php echo join(", ", $quizz_error) ?>). Answer all questions and try again.</div>
+    <?php
+    if (isset($quizz_error)) {
+        if (!empty($quizz_error)) {
+            ?>
+            <div class="alert alert-danger" role="alert">Incorrect fields (question(s) <?php echo join(", ", $quizz_error) ?>). Answer all questions and try again.</div>
+            <br>
+        <?php } else { ?>
+        <div class="alert alert-<?php echo $quizz_result_type; ?>" role="alert">
+            <h4><?php echo $quizz_result_title; ?></h4>
+            <p>Score : <?php echo $quizz_score .'/'. $quizz_max_score; ?></p>
+            <a href="" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
+        </div>
         <br>
-    <?php } else { ?>
-    <div class="alert alert-<?php echo $quizz_result_type; ?>" role="alert">
-        <h4><?php echo $quizz_result_title; ?></h4>
-        <p>Score : <?php echo $quizz_score .'/'. $quizz_max_score; ?></p>
-        <a href="" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
-    </div>
-    <br>
-    <?php } ?>
+    <?php } } ?>
 
     <form method="post" action="#quizz" class="needs-validation" novalidate>
 
