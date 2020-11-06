@@ -10,8 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     die();
 }
 
-$Account = new Account();
-$Account->getAccountById($_SESSION['user_id']);
+$account = new Account();
+$account->getAccountById($_SESSION['user_id']);
 
 
 require_once('../php/views/account.php');
