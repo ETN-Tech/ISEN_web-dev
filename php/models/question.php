@@ -3,30 +3,35 @@
 class Question {
     public $id;
     public $type;
-    public $question;
-    public $propositions = [];
-    public $answer;
+    public $Answer;
 
-    public function getByQuizzId($quizz_id) {
+    // Question constructor
+    public function __construct($id, $type, $Answer) {
+        $this->id = $id;
+        $this->type = $type;
+        $this->question = $Answer;
+    }
+
+
+    // get answers and return them
+    public function getAnswers() {
         global $bdd;
 
-        $get_quizz_questions = $bdd->prepare('SELECT * FROM quizz_questions WHERE quizz_id = ?');
-        $get_quizz_questions->execute(array($quizz_id));
+        $get_answers = $bdd->prepare('SELECT * FROM answer WHERE question_id = ?');
+        $get_answers->execute(array($this->id));
 
-        $bdd_questions = $get_quizz_questions->fetch();
-        $questions = array();
+        $bdd_answers = $get_answers->fetchAll();
+        // create Question array to return
+        $Answers = array();
 
-        // create Question objects for each question
-        foreach ($bdd_questions as $bdd_question) {
-            $question = new Question();
+        // create a Question objects for each question
+        foreach ($bdd_answers as $bdd_answer) {
+            // create a new Question
+            $Answer = new Answer($bdd_answer['id'], $bdd_answer['answer'], $bdd_answer['is_correct']);
 
-            // convert array to object
-            foreach ($bdd_question  as $key => $value) {
-                $question->$key = $value;
-            }
             // add object to return table
-            array_push($questions, $question);
+            array_push($Answers, $Answer);
         }
-        return $questions;
+        return $Answers;
     }
 }

@@ -10,12 +10,12 @@ if (!isset($_SESSION['user_id'])) {
     die();
 }
 
-$account = new Account();
-$account->getById($_SESSION['user_id']);
+$Account = new Account();
+$Account->getAccountById($_SESSION['user_id']);
 
 // format datetime
-$full_name = $account->getFullname();
-$last_connexion = ucfirst(strftime('%a %e %B %Y - %kh%M', strtotime($account->last_connexion)));
+$full_name = $Account->getFullname();
+$last_connexion = ucfirst(strftime('%a %e %B %Y - %kh%M', strtotime($Account->last_connexion)));
 
 
 require_once('../php/views/account.php');

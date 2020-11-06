@@ -19,13 +19,13 @@ if (isset($_POST['form-login'])) {
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
         
-        $bdd_account = new Account();
-        $bdd_account->getByUsername($username);
+        $BddAccount = new Account();
+        $BddAccount->getAccountByUsername($username);
         
         // vérifier le mot de passe
-        if ($bdd_account->verifyPassword($password)) {
+        if ($BddAccount->verifyPassword($password)) {
             // création de la session de connexion
-            $_SESSION['user_id'] = $bdd_account->id;
+            $_SESSION['user_id'] = $BddAccount->id;
             
             header('Location: ?url=account');
             die();

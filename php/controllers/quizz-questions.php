@@ -2,7 +2,7 @@
 
 require_once('../php/models/quizz.php');
 require_once('../php/models/question.php');
-require_once('../php/models/proposition.php');
+require_once('../php/models/answer.php');
 
 // verify if quizz page requested
 if (!isset($_GET['q']) || empty($_GET['q'])) {
@@ -10,80 +10,81 @@ if (!isset($_GET['q']) || empty($_GET['q'])) {
     die();
 }
 
-$bdd_quizz = new Quizz();
-$quizz_exist = $bdd_quizz->getByName(htmlspecialchars($_GET['q']));
+// secure quizz name
+$quizz_name = htmlspecialchars($_GET['q']);
 
 // verify if the quizz exists
-if (!$quizz_exist) {
+if (!Quizz::quizzExistByName($quizz_name)) {
     header('Location: ?url=quizz');
     die();
 }
 
-$meta_title = "Quizz ". $bdd_quizz->title;
+$BddQuizz = new Quizz(null, $quizz_name);
 
-$bdd_questions = new Question();
-$bdd_questions->getByQuizzId($bdd_quizz->id);
+$meta_title = "Quizz ". $BddQuizz->title;
+
+$Questions = $BddQuizz->getQuestions();
 
 // check if quizz form is sent
 if (isset($_POST['form-quizz'])) {
     $quizz_error = array();
     $quizz_wrong = array();
-    $quizz_base_score = 10 / count($bdd_questions);
-    $quizz_score = count($bdd_questions) * $quizz_base_score;
-    $quizz_max_score = count($bdd_questions) * $quizz_base_score;
+    $quizz_base_score = 10 / count($Questions);
+    $quizz_score = count($Questions) * $quizz_base_score;
+    $quizz_max_score = count($Questions) * $quizz_base_score;
 }
 
 // format questions
-foreach($bdd_questions as $key_q => $question) {
+foreach($Questions as $key_q => $Question) {
 
     // if quizz sent, correction
     if (isset($quizz_error)) {
-        if (in_array($question['type'], ['input', 'radio'])) {
+        if (in_array($Question->type, ['input', 'radio'])) {
 
             // verify fields exist if input/radio type
-            if (!isset($_POST[$question['id']]) || empty($_POST[$question['id']])) {
-                array_push($quizz_error, $question['id']);
+            if (!isset($_POST[$Question['id']]) || empty($_POST[$Question['id']])) {
+                array_push($quizz_error, $Questions['id']);
             }
             else {
                 // get user answer
-                $user_answer = htmlspecialchars($_POST[$question['id']]);
+                $user_answer = htmlspecialchars($_POST[$Questions['id']]);
 
-                if ($question['type'] == 'input') {
+                if ($Questions['type'] == 'input') {
                     // get the answer for that question
-                    $answer = get_question_input($question['id'])->fetch()['answer'];
+                    $answer = get_question_input($Questions['id'])->fetch()['answer'];
 
                     // check if answer is incorrect
                     if (strtolower($answer) != trim(strtolower($user_answer))) {
                         $quizz_score -= $quizz_base_score;
-                        array_push($quizz_wrong, $question['id']);
+                        array_push($quizz_wrong, $Questions['id']);
                     }
                 }
-                else if ($question['type'] == 'radio') {
+                else if ($Questions['type'] == 'radio') {
                     // get proposition selected by user
                     $proposition = get_proposition($user_answer)->fetch();
 
                     // check if proposition is incorrect
                     if (!$proposition['is_correct']) {
                         $quizz_score -= $quizz_base_score;
-                        array_push($quizz_wrong, $question['id']);
+                        array_push($quizz_wrong, $Questions['id']);
                     }
                 }
             }
         }
         // if input type chekbox
-        else if ($question['type'] == 'checkbox') {
+        else if ($Questions['type'] == 'checkbox') {
             // get all propositions (choices) for that question
-            $propositions = get_question_radio_checkbox($question['id'])->fetchAll();
+            $propositions = get_question_radio_checkbox($Questions['id'])->fetchAll();
 
             // check each proposition
             foreach ($propositions as $key_p => $proposition) {
 
                 // check if user ticked this proposition
-                if (isset($_POST[$question['id'] .'-'. $proposition['id']])) {
+                if (isset($_POST[$Questions['id'] .'-'. $proposition['id']])) {
                     // check if proposition is incorrect
                     if (!$proposition['is_correct']) {
                         $quizz_score -= $quizz_base_score / count($propositions);
-                        array_push($quizz_wrong, $question['id'] .'-'. $proposition['id']);
+                        array_push($quizz_wrong, $Questions['id'] .'-'. $proposition['id']);
                     }
                 }
                 // if user didn't tick the proposition
@@ -98,49 +99,49 @@ foreach($bdd_questions as $key_q => $question) {
     }
 
     // check if it's radio/checkbox type
-    if (in_array($question['type'], ['radio', 'checkbox'])) {
+    if (in_array($Question->type, ['radio', 'checkbox'])) {
 
         // get all propositions (choices) for that question
-        $propositions = get_question_radio_checkbox($question['id'])->fetchAll();
+        $propositions = get_question_radio_checkbox($Questions['id'])->fetchAll();
 
         // go throw all propositions
         foreach ($propositions as $key_p => $proposition) {
             // add and format fields for quizz
-            $propositions[$key_p]['name'] = ($question['type'] == 'radio') ? $question['id'] : $question['id'] .'-'. $proposition['id'];
+            $propositions[$key_p]['name'] = ($Questions['type'] == 'radio') ? $Questions['id'] : $Questions['id'] .'-'. $proposition['id'];
             $propositions[$key_p]['value'] = $proposition['id'];
-            $propositions[$key_p]['required'] = ($question['type'] == 'radio') ? 'required' : '';
+            $propositions[$key_p]['required'] = ($Questions['type'] == 'radio') ? 'required' : '';
             // set default value
             $propositions[$key_p]['checked'] = '';
 
             // if quizz sent, correction
             if (isset($quizz_error)) {
 
-                if ($question['type'] == 'radio' && isset($_POST[$question['id']])) {
+                if ($Questions['type'] == 'radio' && isset($_POST[$Questions['id']])) {
                     // get question value (id of proposition chosen)
-                    $user_value = htmlspecialchars($_POST[$question['id']]);
+                    $user_value = htmlspecialchars($_POST[$Questions['id']]);
 
                     // if value inputed by user correspond to this proposition_id, proposition is checked
                     $propositions[$key_p]['checked'] = ($user_value == $proposition['id']) ? 'checked' : '';
                 }
-                else if ($question['type'] == 'checkbox') {
+                else if ($Questions['type'] == 'checkbox') {
                     // if field [question_id]-[proposition_id] exists, proposition is checked
-                    $propositions[$key_p]['checked'] = (isset($_POST[$question['id'].'-'.$proposition['id']])) ? 'checked' : '';
+                    $propositions[$key_p]['checked'] = (isset($_POST[$Questions['id'].'-'.$proposition['id']])) ? 'checked' : '';
                 }
             }
         }
         // ajouter les propositions à la question
-        $questions[$key_q]['propositions'] = $propositions;
+        $Questionss[$key_q]['propositions'] = $propositions;
     }
     // check if it's an input type
-    else if ($question['type'] == 'input') {
+    else if ($Questions->type == 'input') {
         // check if quizz sent and question_id valid
-        if (isset($quizz_error) && isset($_POST[$question['id']]) && !empty($_POST[$question['id']])) {
+        if (isset($quizz_error) && isset($_POST[$Questions['id']]) && !empty($_POST[$Questions['id']])) {
             // get user input
-            $user_input = htmlspecialchars($_POST[$question['id']]);
+            $user_input = htmlspecialchars($_POST[$Questions['id']]);
 
-            $questions[$key_q]['value'] = $user_input;
+            $Questionss[$key_q]['value'] = $user_input;
         } else {
-            $questions[$key_q]['value'] = '';
+            $Questionss[$key_q]['value'] = '';
         }
     }
 }
