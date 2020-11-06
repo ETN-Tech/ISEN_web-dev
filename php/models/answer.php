@@ -23,4 +23,8 @@ class Answer {
         $this->required = $required;
     }
 
+
+    public function getAnswerById() {
+
+    }
 }
