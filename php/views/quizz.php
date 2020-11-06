@@ -4,7 +4,7 @@
     <p>Choose a quizz to start !</p>
 
     <div class="row">
-        <?php foreach($bdd_quizzes as $quizz) { ?>
+        <?php foreach($BddQuizzes as $quizz) { ?>
         <div class="col-sm-4">
            <div class="card">
                 <img src="<?php echo $quizz->img_url; ?>" alt="<?php echo $quizz->title; ?> quizz" class="card-img-top">

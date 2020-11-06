@@ -1,9 +1,9 @@
 <div class="card border-0 bg-dark text-white text-center">
-    <img src="<?php echo $bdd_quizz['img_url']; ?>" alt="Quizz <?php echo $bdd_quizz['name'] ?>" class="img-fluid quizz-full-img">
+    <img src="<?php echo $BddQuizz['img_url']; ?>" alt="Quizz <?php echo $BddQuizz['name'] ?>" class="img-fluid quizz-full-img">
     <div class="card-img-overlay align-middle quizz-header-overlay">
-        <h1 class="card-title">Quizz <?php echo $bdd_quizz['label'] ?></h1>
+        <h1 class="card-title">Quizz <?php echo $BddQuizz['label'] ?></h1>
 
-        <h5 class="card-text"><?php echo $bdd_quizz['description']; ?></h5>
+        <h5 class="card-text"><?php echo $BddQuizz['description']; ?></h5>
     </div>
 </div>
 
@@ -26,31 +26,31 @@
 
     <form method="post" action="#quizz" class="needs-validation" novalidate>
 
-        <?php foreach($questions as $question) { ?>
+        <?php foreach($Questionss as $Questions) { ?>
 
             <div class="form-group">
 
-                <label for="<?php echo $question['id']; ?>"><?php echo $question['id'] .'. '. $question['question']; ?></label><br>
+                <label for="<?php echo $Questions['id']; ?>"><?php echo $Questions['id'] .'. '. $Questions['question']; ?></label><br>
 
                 <?php
-                if (in_array($question['type'], ['radio', 'checkbox', 'select'])) {
-                    foreach($question['propositions'] as $proposition) {
+                if (in_array($Questions['type'], ['radio', 'checkbox', 'select'])) {
+                    foreach($Questions['propositions'] as $proposition) {
                         ?>
-                            <div class="custom-control custom-<?php echo $question['type']; ?> custom-control-inline">
-                                <input class="custom-control-input" type="<?php echo $question['type']; ?>" name="<?php echo $proposition['name']; ?>" value="<?php echo $proposition['value']; ?>" id="<?php echo $proposition['id']; ?>" <?php echo $proposition['checked']; ?> <?php echo $proposition['required']; ?>>
+                            <div class="custom-control custom-<?php echo $Questions['type']; ?> custom-control-inline">
+                                <input class="custom-control-input" type="<?php echo $Questions['type']; ?>" name="<?php echo $proposition['name']; ?>" value="<?php echo $proposition['value']; ?>" id="<?php echo $proposition['id']; ?>" <?php echo $proposition['checked']; ?> <?php echo $proposition['required']; ?>>
                                 <label class="custom-control-label" for="<?php echo $proposition['id']; ?>"><?php echo $proposition['proposition']; ?></label>
                             </div>
                         <?php
                     }
-                } else if ($question['type'] == 'input') {
+                } else if ($Questions['type'] == 'input') {
                 ?>
-                    <input type="text" class="form-control" id="<?php echo $question['id']; ?>" name="<?php echo $question['id']; ?>" value="<?php echo $question['value']; ?>" aria-describedby="<?php echo $question['id']; ?>" required>
+                    <input type="text" class="form-control" id="<?php echo $Questions['id']; ?>" name="<?php echo $Questions['id']; ?>" value="<?php echo $Questions['value']; ?>" aria-describedby="<?php echo $Questions['id']; ?>" required>
                     <div class="invalid-feedback">Please answer the question.</div>
                     <?php
                 }
-                if (!empty($question['tips'])) {
+                if (!empty($Questions['tips'])) {
                 ?>
-                    <small id="<?php echo $question['id']; ?>" class="form-text text-muted"><?php echo $question['tips']; ?></small>
+                    <small id="<?php echo $Questions['id']; ?>" class="form-text text-muted"><?php echo $Questions['tips']; ?></small>
                 <?php } ?>
 
             </div><br>

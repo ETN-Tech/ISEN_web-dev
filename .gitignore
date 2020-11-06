@@ -3,6 +3,7 @@
 .env
 /vendor/
 /.idea/
+/app/test.php
 
 php/bdd-env.php
 app/test.php

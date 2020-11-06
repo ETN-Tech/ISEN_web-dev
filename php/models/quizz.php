@@ -7,58 +7,94 @@ class Quizz {
     public $description;
     public $img_url;
 
+    // Quizz constructor
+    public function __construct($id = null, $name = null) {
+
+        // detect if either id or name provided
+        if ($id != null || $name != null) {
+            global $bdd;
+
+            // generate fields key and value for bdd selection
+            $key = ($id != null) ? 'id' : 'name';
+            $value = ($id != null) ? $id : $name;
+
+            $get_quizz = $bdd->prepare('SELECT * FROM quizz WHERE '. $key .' = ?');
+            $get_quizz->execute(array($value));
+
+            $bdd_quizz = $get_quizz->fetch();
+
+            if ($bdd_quizz) {
+                $this->id = $bdd_quizz['id'];
+                $this->name = $bdd_quizz['name'];
+                $this->title = $bdd_quizz['title'];
+                $this->description = $bdd_quizz['description'];
+                $this->img_url = $bdd_quizz['img_url'];
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new Exception("Quizz constructor requires id or name");
+        }
+    }
+
+
     // get all quizzes infos and return them
-    public function getQuizzes() {
+    public static function getQuizzes() {
         global $bdd;
 
-        $get_quizzes = $bdd->query('SELECT * FROM quizzes');
+        $get_quizzes = $bdd->query('SELECT id FROM quizz');
 
         $bdd_quizzes = $get_quizzes->fetchAll();
-        $quizzes = array();
+        $Quizzes = array();
 
         // create Quizz objects for each quizz
         foreach ($bdd_quizzes as $bdd_quizz) {
-            $quizz = new Quizz();
+            $Quizz = new Quizz($bdd_quizz['id']);
 
-            // convert array to object
-            foreach ($bdd_quizz  as $key => $value) {
-                $quizz->$key = $value;
-            }
             // add object to return table
-            array_push($quizzes, $quizz);
+            array_push($Quizzes, $Quizz);
         }
-        return $quizzes;
+        return $Quizzes;
     }
 
-    // get account by id
-    public function getById($id) {
-        return $this->executeGetBy('id', $id);
-    }
-
-    // get account by name
-    public function getByName($name) {
-        return $this->executeGetBy('name', $name);
-    }
-
-    // execute a request and fill fields
-    private function executeGetBy($key, $value) {
+    // find if quizz exist in bdd
+    public static function quizzExistByName($name) {
         global $bdd;
 
-        $get_account = $bdd->prepare('SELECT * FROM quizzes WHERE '. $key .' = ?');
-        $get_account->execute(array($value));
+        $get_quizz = $bdd->prepare('SELECT id FROM quizz WHERE name = ?');
+        $get_quizz->execute(array($name));
 
-        $bdd_account = $get_account->fetch();
+        $bdd_quizz = $get_quizz->fetch();
 
-        if ($bdd_account) {
-            $this->id = $bdd_account['id'];
-            $this->name = $bdd_account['name'];
-            $this->title = $bdd_account['title'];
-            $this->description = $bdd_account['description'];
-            $this->img_url = $bdd_account['img_url'];
+        // test if quizz exist
+        if ($bdd_quizz) {
             return true;
         } else {
             return false;
         }
+    }
+
+    // get questions and return them
+    public function getQuestions() {
+        global $bdd;
+
+        $get_questions = $bdd->prepare('SELECT * FROM question WHERE quizz_id = ?');
+        $get_questions->execute(array($this->id));
+
+        $bdd_questions = $get_questions->fetchAll();
+        // create Question array to return
+        $Questions = array();
+
+        // create a Question objects for each question
+        foreach ($bdd_questions as $bdd_question) {
+            // create a new Question
+            $Question = new Question($bdd_question['id'], $bdd_question['type'], $bdd_question['question']);
+
+            // add object to return table
+            array_push($Questions, $Question);
+        }
+        return $Questions;
     }
 }
 

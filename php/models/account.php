@@ -15,20 +15,20 @@ class Account {
     }
 
     // get account by id
-    public function getById($id) {
-        return $this->executeGetBy('id', $id);
+    public function getAccountById($id) {
+        return $this->executeGetAccountBy('id', $id);
     }
 
     // get account by username
-    public function getByUsername($username) {
-        return $this->executeGetBy('username', $username);
+    public function getAccountByUsername($username) {
+        return $this->executeGetAccountBy('username', $username);
     }
 
     // execute a request and fill
-    private function executeGetBy($key, $value) {
+    private function executeGetAccountBy($key, $value) {
         global $bdd;
 
-        $get_account = $bdd->prepare('SELECT * FROM accounts WHERE '. $key .' = ?');
+        $get_account = $bdd->prepare('SELECT * FROM account WHERE '. $key .' = ?');
         $get_account->execute(array($value));
 
         $bdd_account = $get_account->fetch();
