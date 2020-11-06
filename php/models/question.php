@@ -28,9 +28,9 @@ class Question {
         foreach ($bdd_answers as $bdd_answer) {
             // add and format fields for quizz
             $form_id = in_array($this->type, ['radio', 'select']) ? $this->id .'-'. $bdd_answer['id'] : $bdd_answer['id'];
-            $name = in_array($this->type, ['radio', 'select']) ? $this->id : $this->id .'-'. $bdd_answer['id'];
-            $value = $bdd_answer['id'];
-            $required = (in_array($this->type, ['input', 'radio', 'select'])) ? 'required' : '';
+            $name = ($this->type == 'checkbox') ? $this->id .'-'. $bdd_answer['id'] : $this->id;
+            $value = ($this->type == 'input') ? '' : $bdd_answer['id'];
+            $required = ($this->type == 'checkbox') ? '' : 'required';
 
             // set default value for checked
             $checked = '';
