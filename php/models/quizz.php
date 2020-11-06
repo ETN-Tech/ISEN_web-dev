@@ -46,16 +46,16 @@ class Quizz {
         $get_quizzes = $bdd->query('SELECT id FROM quizz');
 
         $bdd_quizzes = $get_quizzes->fetchAll();
-        $Quizzes = array();
+        $quizzes = array();
 
         // create Quizz objects for each quizz
         foreach ($bdd_quizzes as $bdd_quizz) {
-            $Quizz = new Quizz($bdd_quizz['id']);
+            $quizz = new Quizz($bdd_quizz['id']);
 
             // add object to return table
-            array_push($Quizzes, $Quizz);
+            array_push($quizzes, $quizz);
         }
-        return $Quizzes;
+        return $quizzes;
     }
 
     // find if quizz exist in bdd
@@ -84,17 +84,17 @@ class Quizz {
 
         $bdd_questions = $get_questions->fetchAll();
         // create Question array to return
-        $Questions = array();
+        $questions = array();
 
         // create a Question objects for each question
         foreach ($bdd_questions as $bdd_question) {
             // create a new Question
-            $Question = new Question($bdd_question['id'], $bdd_question['type'], $bdd_question['question']);
+            $question = new Question($bdd_question['id'], $bdd_question['type'], $bdd_question['question']);
 
             // add object to return table
-            array_push($Questions, $Question);
+            array_push($questions, $question);
         }
-        return $Questions;
+        return $questions;
     }
 }
 
