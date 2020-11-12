@@ -45,11 +45,11 @@ class Quizz {
 
         $get_quizzes = $bdd->query('SELECT id FROM quizz');
 
-        $quizzes = $get_quizzes->fetchAll();
+        $bdd_quizzes = $get_quizzes->fetchAll();
         $quizzes = array();
 
         // create Quizz objects for each quizz
-        foreach ($quizzes as $quizz) {
+        foreach ($bdd_quizzes as $quizz) {
             $quizz = new Quizz($quizz['id']);
 
             // add object to return table

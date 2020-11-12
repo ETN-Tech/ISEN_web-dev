@@ -5,13 +5,13 @@ require_once('../php/models/question.php');
 require_once('../php/models/answer.php');
 
 // verify if quizz page requested
-if (!isset($_GET['q']) || empty($_GET['q'])) {
+if (!isset($_GET['quizz']) || empty($_GET['quizz'])) {
     header('Location: ?url=quizz');
     die();
 }
 
 // secure quizz name
-$quizz_name = htmlspecialchars($_GET['q']);
+$quizz_name = htmlspecialchars($_GET['quizz']);
 
 // verify if the quizz exists
 if (!Quizz::quizzExistByName($quizz_name)) {
@@ -19,7 +19,7 @@ if (!Quizz::quizzExistByName($quizz_name)) {
     die();
 }
 
-// create the quizz with the name
+// get the quizz with the name
 $quizz = new Quizz(null, $quizz_name);
 
 $meta_title = "Quizz ". $quizz->title;
