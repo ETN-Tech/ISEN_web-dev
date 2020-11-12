@@ -1,7 +1,5 @@
 <?php
 
-require_once('../php/models/account.php');
-
 $meta_title = "Account";
 
 
