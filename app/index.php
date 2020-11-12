@@ -1,6 +1,13 @@
 <?php
 
-require_once("../php/init.php");
+require_once ("../php/init.php");
+
+require_once ("../php/models/Account.php");
+require_once ('../php/models/Quizz.php');
+require_once ('../php/models/Question.php');
+require_once ('../php/models/Answer.php');
+require_once ('../php/models/AccountAnswer.php');
+
 
 $url = '';
 $params = [];
@@ -53,10 +60,12 @@ else {
     $controller = '404';
 }
 
+
 // add content in buffer
 ob_start();
-require_once '../php/controllers/'. $controller .'.php';
+require_once ('../php/controllers/'. $controller .'.php');
 // get content in buffer and clean it
 $content = ob_get_clean();
 
-require_once '../php/views/layout.php';
+
+require_once ('../php/views/layout.php');
