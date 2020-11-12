@@ -9,24 +9,9 @@
 
 <div class="content">
 
-    <?php
-    if (isset($quizz_error)) {
-        if (!empty($quizz_error)) {
-            ?>
-            <div class="alert alert-danger" role="alert">Incorrect fields (question(s) <?php echo join(", ", $quizz_error) ?>). Answer all questions and try again.</div>
-            <br>
-        <?php } else { ?>
-        <div class="alert alert-<?php echo $quizz_result_type; ?>" role="alert">
-            <h4><?php echo $quizz_result_title; ?></h4>
-            <p>Score : <?php echo $quizz_score .'/'. $quizz_max_score; ?></p>
-            <a href="" type="button" class="btn btn-sm btn-outline-<?php echo $quizz_result_type; ?>">Try again</a>
-        </div>
-        <br>
-    <?php } } ?>
-
     <form method="post" action="#quizz" class="needs-validation" novalidate>
 
-        <fieldset <?php echo $quizz_disabled; ?>>
+        <fieldset>
 
             <?php
             foreach($questions as $question) {
@@ -42,7 +27,7 @@
                     // get first answer for input
                     $answer = $answers[0];
                     ?>
-                    <input class="form-control" type="text" id="<?php echo $question->id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?>"  <?php echo $answer->checked; ?> <?php echo $answer->required; ?>>
+                    <input class="form-control" type="text" id="<?php echo $question->id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?>" <?php echo $answer->required; ?>>
 
                 <?php } else if ($question->type == 'select') { ?>
 
@@ -57,7 +42,7 @@
                     foreach($answers as $answer) {
                     ?>
                     <div class="custom-control custom-<?php echo $question->type; ?> custom-control-inline">
-                        <input class="custom-control-input" type="<?php echo $question->type; ?>" id="<?php echo $answer->form_id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?>" <?php echo $answer->checked; ?> <?php echo $answer->required; ?>>
+                        <input class="custom-control-input" type="<?php echo $question->type; ?>" id="<?php echo $answer->form_id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?> <?php echo $answer->required; ?>>
                         <label class="custom-control-label" for="<?php echo $answer->form_id; ?>"><?php echo $answer->answer; ?></label>
                     </div>
 

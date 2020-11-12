@@ -49,13 +49,24 @@ class Quizz {
         $quizzes = array();
 
         // create Quizz objects for each quizz
-        foreach ($bdd_quizzes as $quizz) {
-            $quizz = new Quizz($quizz['id']);
+        foreach ($bdd_quizzes as $bdd_quizz) {
+            $quizz = new Quizz($bdd_quizz['id']);
 
             // add object to return table
             array_push($quizzes, $quizz);
         }
         return $quizzes;
+    }
+
+    public static function getQuizzByAccountAnswerDate($date) {
+        global $bdd;
+
+        $get_quizz = $bdd->prepare("SELECT id FROM quizz INNER JOIN question ON quizz.id = question.quizz_id INNER JOIN answer ON question.id = answer.question_id INNER JOIN account_answer ON answer.id = account_answer.answer_id WHERE date = ?");
+        $get_quizz->execute(array($date));
+
+        $quizz_id = $get_quizz->fetchAll()[0];
+
+        return new Quizz($quizz_id, null);
     }
 
     // find if quizz exist in bdd
@@ -95,6 +106,58 @@ class Quizz {
             array_push($questions, $question);
         }
         return $questions;
+    }
+
+    public function calculateScore($date) {
+        global $bdd;
+
+        $questions = $this->getQuestions();
+
+        // initialize variables
+        $base_score = 10 / count($questions);
+        $score = count($questions) * $base_score;
+
+        // verify answers
+        foreach ($questions as $question) {
+
+            // get correct answers
+            $correct_answer = $question->getCorrectAnswers();
+
+            if ($question->type == 'input') {
+                // if correct_answer doesn't exist in account_answer, user answered incorrectly
+                if (AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
+                    $score -= $base_score;
+                }
+            }
+            else if ($question->type == 'checkbox') {
+                // get possible answers
+                $answers = $question->getAnswers();
+
+                // verify for each possible answer
+                foreach ($answers as $answer) {
+
+                    if ($answer->is_correct) {
+                        // if answer is correct and user didn't check it, loose points
+                        if (!AccountAnswer::accountAnswerExist($account->id, $answer->id, $date)) {
+                            $score -= $base_score / count($answers);
+                        }
+                    }
+                    else {
+                        // if answer is not correct and user checked it, loose points
+                        if (AccountAnswer::accountAnswerExist($account->id, $answer->id, $date)) {
+                            $score -= $base_score / count($answers);
+                        }
+                    }
+                }
+            }
+            else {
+                // if correct_answer doesn't exist in account_answer, user answered incorrectly
+                if (!AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
+                    $score -= $base_score;
+                }
+            }
+        }
+        return $score;
     }
 }
 

@@ -43,4 +43,18 @@ class Question {
         }
         return $answers;
     }
+
+    public function getCorrectAnswers() {
+        global $bdd;
+
+        $get_answers = $bdd->prepare("SELECT id FROM answer WHERE question_id = ? AND is_correct = 1");
+        $get_answers->execute(array($this->id));
+
+        if ($this->type == 'checkbox') {
+            return $get_answers->fetchAll();
+        }
+        else {
+            return $get_answers->fetch();
+        }
+    }
 }
