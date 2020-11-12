@@ -1,9 +1,9 @@
 <div class="card border-0 bg-dark text-white text-center">
-    <img src="<?php echo $bdd_quizz->img_url; ?>" alt="Quizz <?php echo $bdd_quizz->name ?>" class="img-fluid quizz-full-img">
+    <img src="<?php echo $quizz->img_url; ?>" alt="Quizz <?php echo $quizz->name ?>" class="img-fluid quizz-full-img">
     <div class="card-img-overlay align-middle quizz-header-overlay">
-        <h1 class="card-title">Quizz <?php echo $bdd_quizz->title ?></h1>
+        <h1 class="card-title">Quizz <?php echo $quizz->title ?></h1>
 
-        <h5 class="card-text"><?php echo $bdd_quizz->description; ?></h5>
+        <h5 class="card-text"><?php echo $quizz->description; ?></h5>
     </div>
 </div>
 
@@ -24,7 +24,7 @@
         <br>
     <?php } } ?>
 
-    <form method="post" action="#quizz" class="eeds-validation" novalidate>
+    <form method="post" action="#quizz" class="needs-validation" novalidate>
 
         <fieldset <?php echo $quizz_disabled; ?>>
 
@@ -73,6 +73,8 @@
             <?php } ?>
 
         </fieldset>
+
+        <input type="hidden" name="quizz-name" value="<?php echo $quizz->name; ?>>">
 
         <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
     </form>

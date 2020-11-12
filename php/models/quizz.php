@@ -21,14 +21,14 @@ class Quizz {
             $get_quizz = $bdd->prepare('SELECT * FROM quizz WHERE '. $key .' = ?');
             $get_quizz->execute(array($value));
 
-            $bdd_quizz = $get_quizz->fetch();
+            $quizz = $get_quizz->fetch();
 
-            if ($bdd_quizz) {
-                $this->id = $bdd_quizz['id'];
-                $this->name = $bdd_quizz['name'];
-                $this->title = $bdd_quizz['title'];
-                $this->description = $bdd_quizz['description'];
-                $this->img_url = $bdd_quizz['img_url'];
+            if ($quizz) {
+                $this->id = $quizz['id'];
+                $this->name = $quizz['name'];
+                $this->title = $quizz['title'];
+                $this->description = $quizz['description'];
+                $this->img_url = $quizz['img_url'];
                 return true;
             } else {
                 return false;
@@ -45,12 +45,12 @@ class Quizz {
 
         $get_quizzes = $bdd->query('SELECT id FROM quizz');
 
-        $bdd_quizzes = $get_quizzes->fetchAll();
+        $quizzes = $get_quizzes->fetchAll();
         $quizzes = array();
 
         // create Quizz objects for each quizz
-        foreach ($bdd_quizzes as $bdd_quizz) {
-            $quizz = new Quizz($bdd_quizz['id']);
+        foreach ($quizzes as $quizz) {
+            $quizz = new Quizz($quizz['id']);
 
             // add object to return table
             array_push($quizzes, $quizz);
@@ -65,10 +65,10 @@ class Quizz {
         $get_quizz = $bdd->prepare('SELECT id FROM quizz WHERE name = ?');
         $get_quizz->execute(array($name));
 
-        $bdd_quizz = $get_quizz->fetch();
+        $quizz = $get_quizz->fetch();
 
         // test if quizz exist
-        if ($bdd_quizz) {
+        if ($quizz) {
             return true;
         } else {
             return false;
