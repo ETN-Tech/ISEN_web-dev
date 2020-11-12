@@ -9,7 +9,7 @@
 
 <div class="content">
 
-    <form method="post" action="#quizz" class="needs-validation" novalidate>
+    <form method="post" action="?url=quizz-correction" class="needs-validation" novalidate>
 
         <fieldset>
 
@@ -42,7 +42,7 @@
                     foreach($answers as $answer) {
                     ?>
                     <div class="custom-control custom-<?php echo $question->type; ?> custom-control-inline">
-                        <input class="custom-control-input" type="<?php echo $question->type; ?>" id="<?php echo $answer->form_id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?> <?php echo $answer->required; ?>>
+                        <input class="custom-control-input" type="<?php echo $question->type; ?>" id="<?php echo $answer->form_id; ?>" name="<?php echo $answer->name; ?>" value="<?php echo $answer->value; ?>" <?php echo $answer->required; ?>>
                         <label class="custom-control-label" for="<?php echo $answer->form_id; ?>"><?php echo $answer->answer; ?></label>
                     </div>
 
@@ -59,7 +59,7 @@
 
         </fieldset>
 
-        <input type="hidden" name="quizz-name" value="<?php echo $quizz->name; ?>>">
+        <input type="hidden" name="quizz-name" value="<?php echo $quizz->name; ?>">
 
         <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
     </form>

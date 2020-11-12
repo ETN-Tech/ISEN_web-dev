@@ -12,7 +12,7 @@ $quizz = Quizz::getQuizzByAccountAnswerDate($date);
 
 $meta_title = "Quizz ". $quizz->title ." score";
 
-$score = $quizz->calculateScore();
+$score = $quizz->calculateScore($date);
 
 
 // set presentation according to the score

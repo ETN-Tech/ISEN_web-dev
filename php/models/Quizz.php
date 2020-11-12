@@ -61,12 +61,14 @@ class Quizz {
     public static function getQuizzByAccountAnswerDate($date) {
         global $bdd;
 
-        $get_quizz = $bdd->prepare("SELECT id FROM quizz INNER JOIN question ON quizz.id = question.quizz_id INNER JOIN answer ON question.id = answer.question_id INNER JOIN account_answer ON answer.id = account_answer.answer_id WHERE date = ?");
+        $get_quizz = $bdd->prepare("SELECT quizz.id FROM quizz INNER JOIN question ON quizz.id = question.quizz_id INNER JOIN answer ON question.id = answer.question_id INNER JOIN account_answer ON answer.id = account_answer.answer_id WHERE account_answer.date = ?");
         $get_quizz->execute(array($date));
 
-        $quizz_id = $get_quizz->fetchAll()[0];
+        $quizz_id = $get_quizz->fetch()[0];
 
-        return new Quizz($quizz_id, null);
+        $quizz = new Quizz($quizz_id, null);
+
+        return $quizz;
     }
 
     // find if quizz exist in bdd
@@ -109,7 +111,7 @@ class Quizz {
     }
 
     public function calculateScore($date) {
-        global $bdd;
+        global $account;
 
         $questions = $this->getQuestions();
 
@@ -119,13 +121,12 @@ class Quizz {
 
         // verify answers
         foreach ($questions as $question) {
-
             // get correct answers
             $correct_answer = $question->getCorrectAnswers();
 
             if ($question->type == 'input') {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
-                if (AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
+                if (!AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
                     $score -= $base_score;
                 }
             }
