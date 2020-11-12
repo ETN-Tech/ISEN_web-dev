@@ -1,9 +1,5 @@
 <?php
 
-require_once('../php/models/quizz.php');
-require_once('../php/models/question.php');
-require_once('../php/models/answer.php');
-
 // verify if quizz page requested
 if (!isset($_GET['quizz']) || empty($_GET['quizz'])) {
     header('Location: ?url=quizz');

@@ -1,9 +1,5 @@
 <?php
 
-require_once('../php/models/quizz.php');
-require_once('../php/models/account_answer.php');
-
-
 // verify if quizz-name is set
 if (!isset($_POST['quizz-name']) || empty($_POST['quizz-name'])) {
     header('Location: ?url=quizz');
