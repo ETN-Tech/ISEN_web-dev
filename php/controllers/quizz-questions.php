@@ -20,12 +20,12 @@ if (!Quizz::quizzExistByName($quizz_name)) {
 }
 
 // create the quizz with the name
-$bdd_quizz = new Quizz(null, $quizz_name);
+$quizz = new Quizz(null, $quizz_name);
 
-$meta_title = "Quizz ". $bdd_quizz->title;
+$meta_title = "Quizz ". $quizz->title;
 
 // get quizz questions
-$questions = $bdd_quizz->getQuestions();
+$questions = $quizz->getQuestions();
 
 
 // check if quizz form was sent
@@ -48,7 +48,6 @@ if (isset($_POST['form-quizz'])) {
             }
         }
     }
-
 
     // if no error, correct quizz
     if (count($quizz_error) == 0) {
