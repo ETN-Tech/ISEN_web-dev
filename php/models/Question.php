@@ -32,15 +32,37 @@ class Question {
             $value = ($this->type == 'input') ? '' : $bdd_answer['id'];
             $required = ($this->type == 'checkbox') ? '' : 'required';
 
-            // set default value for checked
-            $checked = '';
-
             // create a new Question
-            $answer = new Answer($bdd_answer['id'], $bdd_answer['answer'], $bdd_answer['is_correct'], $form_id, $name, $value, $checked, $required);
+            $answer = new Answer($bdd_answer['id'], $bdd_answer['answer'], $bdd_answer['is_correct'], $form_id, $name, $value, $required);
 
             // add object to return table
             array_push($answers, $answer);
         }
         return $answers;
+    }
+
+    public function getCorrectAnswers() {
+        global $bdd;
+
+        $get_answers = $bdd->prepare("SELECT * FROM answer WHERE question_id = ? AND is_correct = 1");
+        $get_answers->execute(array($this->id));
+
+        if ($this->type == 'checkbox') {
+            $bdd_answers = $get_answers->fetchAll();
+            $answers = array();
+
+            foreach ($bdd_answers as $bdd_answer) {
+                $answer = new Answer($bdd_answer['id'], $bdd_answer['answer'], $bdd_answer['is_correct'], null, null, null, null);
+                array_push($answers, $answer);
+            }
+            return $answers;
+        }
+        else {
+            $bdd_answer = $get_answers->fetch();
+
+            $answer = new Answer($bdd_answer['id'], $bdd_answer['answer'], $bdd_answer['is_correct'], null, null, null, null);
+
+            return $answer;
+        }
     }
 }

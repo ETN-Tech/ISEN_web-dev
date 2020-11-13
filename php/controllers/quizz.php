@@ -1,7 +1,5 @@
 <?php
 
-require_once('../php/models/quizz.php');
-
 $meta_title = "Quizz";
 
 $quizzes = Quizz::getQuizzes();
