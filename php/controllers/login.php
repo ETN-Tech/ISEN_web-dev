@@ -27,8 +27,14 @@ if (isset($_POST['form-login'])) {
 
             // mettre a jour la date de connexion
             $bdd_account->updateLastConnexion();
-            
-            header('Location: ?url=account');
+
+            // handle redirection
+            if (isset($_GET['next'])) {
+                $next = htmlspecialchars($_GET['next']);
+            } else {
+                $next = 'account';
+            }
+            header('Location: ?url='. $next);
             die();
         }
         else {

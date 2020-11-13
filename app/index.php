@@ -40,7 +40,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 // set controller according to url
-if ($url == '') {
+if (in_array($url, ['', 'home'])) {
     $controller = 'home';
 }
 else if ($url == 'login') {
@@ -53,7 +53,7 @@ else if (file_exists('../php/controllers/'. $url .'.php')) {
     if (isset($account)) {
         $controller = $url;
     } else {
-        header('Location: ?url=login');
+        header('Location: ?url=login&next='. $url);
         die();
     }
 }
