@@ -44,7 +44,7 @@ class Question {
     public function getCorrectAnswers() {
         global $bdd;
 
-        $get_answers = $bdd->prepare("SELECT * FROM answer WHERE question_id = ? AND is_correct = 1");
+        $get_answers = $bdd->prepare("SELECT * FROM answer WHERE question_id = ? AND is_correct = true");
         $get_answers->execute(array($this->id));
 
         if ($this->type == 'checkbox') {
