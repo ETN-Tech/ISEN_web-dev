@@ -14,13 +14,6 @@ class Account {
         return $this->surname.' '.$this->name;
     }
 
-    // get last connexion datetime formated
-    public function getLastConnexionFormated() {
-        $time = strtotime($this->last_connexion);
-
-        return ucfirst(strftime('%A %e %B %Y', $time))." - ".strftime('%Hh%M', $time);
-    }
-
     // get account by id
     public function getAccountById($id) {
         return $this->executeGetAccountBy('id', $id);
