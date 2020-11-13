@@ -13,7 +13,7 @@
 
     <br><br><br><br>
 
-    <?php if($user_connected) { ?>
+    <?php if(isset($account)) { ?>
 
     <div class="row">
         <div class="col-6">
