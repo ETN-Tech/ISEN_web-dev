@@ -1,6 +1,7 @@
 <?php
 
 require_once ("../php/init.php");
+require_once ("../php/functions.php");
 
 require_once ("../php/models/Account.php");
 require_once ('../php/models/Quizz.php');

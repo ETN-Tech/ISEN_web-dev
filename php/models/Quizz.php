@@ -160,5 +160,29 @@ class Quizz {
         }
         return $score;
     }
+
+    public static function getScoreType($score) {
+        if ($score >= 7) {
+            return "success";
+        }
+        else if ($score >= 4) {
+            return "warning";
+        }
+        else {
+            return "danger";
+        }
+    }
+
+    public static function getScoreMessage($score) {
+        if ($score >= 7) {
+            return "Congratulations !";
+        }
+        else if ($score >= 4) {
+            return "Quite good !";
+        }
+        else {
+            return "Keep training !";
+        }
+    }
 }
 

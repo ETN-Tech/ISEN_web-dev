@@ -9,10 +9,10 @@
 
 <div class="content">
 
-    <div class="alert alert-<?php echo $result_type; ?>" role="alert">
-        <h4><?php echo $result_title; ?></h4>
+    <div class="alert alert-<?php echo Quizz::getScoreType($score); ?>" role="alert">
+        <h4><?php echo Quizz::getScoreMessage($score); ?></h4>
         <p>Score : <?php echo $score .'/10'; ?></p>
-        <a href="?url=quizz-questions&quizz=<?php echo $quizz->name; ?>" type="button" class="btn btn-sm btn-outline-<?php echo $result_type; ?>">Try again</a>
+        <a href="?url=quizz-questions&quizz=<?php echo $quizz->name; ?>" type="button" class="btn btn-sm btn-outline-<?php echo Quizz::getScoreType($score); ?>">Try again</a>
     </div>
 
 </div>

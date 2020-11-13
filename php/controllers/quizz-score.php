@@ -15,20 +15,5 @@ $meta_title = "Quizz ". $quizz->title ." score";
 $score = $quizz->calculateScore($date);
 
 
-// set presentation according to the score
-if ($score >= 7) {
-    $result_title = "Congratulations !";
-    $result_type = "success";
-}
-else if ($score >= 4) {
-    $result_title = "Quite good !";
-    $result_type = "warning";
-}
-else {
-    $result_title = "Keep training !";
-    $result_type = "danger";
-}
-
-
 require_once ('../php/views/quizz-score.php');
 

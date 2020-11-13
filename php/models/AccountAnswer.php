@@ -15,6 +15,15 @@ class AccountAnswer {
         $this->date = $date;
     }
 
+    public static function getAccountAnswerDatesByAccount($account_id) {
+        global $bdd;
+
+        $get_account_answers = $bdd->prepare("SELECT account_answer.date FROM account_answer WHERE account_id = ? GROUP BY account_answer.date");
+        $get_account_answers->execute(array($account_id));
+
+        return $get_account_answers->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     public static function accountAnswerExist($account_id, $answer_id, $date) {
         global $bdd;
 
