@@ -15,7 +15,7 @@
         </div>
     </div>
     <br><br>
-    <h3>Quizz scores</h3>
+    <h3 id="last-scores">Last quizz scores</h3>
     <br>
     <table class="table table-bordered table-striped">
         <thead>
@@ -36,7 +36,7 @@
             <tr>
                 <th><?php echo $i; ?></th>
                 <td><a href="?url=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
-                <td class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></td>
+                <td><a href="?url=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
             </tr>
             <?php } ?>
