@@ -39,10 +39,17 @@ class AccountAnswer {
         }
     }
 
-    public function insertAccountAnswer() {
+    public static function insertBdd($account_id, $answer_id, $date) {
         global $bdd;
 
         $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
-        $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
+        $ins_account_answer->execute(array($account_id, $answer_id, $date));
+    }
+
+    public static function deleteBdd($date) {
+        global $bdd;
+
+        $del_account_answer = $bdd->prepare("DELETE FROM account_answer WHERE date = ?");
+        $del_account_answer->execute(array($date));
     }
 }
