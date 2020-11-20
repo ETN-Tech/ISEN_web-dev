@@ -2,7 +2,7 @@
 
 // verify if quizz page requested
 if (!isset($_GET['quizz']) || empty($_GET['quizz'])) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
@@ -11,7 +11,7 @@ $quizz_name = htmlspecialchars($_GET['quizz']);
 
 // verify if the quizz exists
 if (!Quizz::quizzExistByName($quizz_name)) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 

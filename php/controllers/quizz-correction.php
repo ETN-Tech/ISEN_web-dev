@@ -2,7 +2,7 @@
 
 // verify if quizz-name is set
 if (!isset($_POST['quizz-name']) || empty($_POST['quizz-name'])) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
@@ -10,7 +10,7 @@ $quizz_name = htmlspecialchars($_POST['quizz-name']);
 
 // verify if the quizz exists
 if (!Quizz::quizzExistByName($quizz_name)) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
@@ -88,5 +88,5 @@ foreach($questions as $question) {
 }
 
 // redirect to quizz-score
-header('Location: ?url=quizz-score&date='. $date);
+header('Location: ?page=quizz-score&date='. $date);
 

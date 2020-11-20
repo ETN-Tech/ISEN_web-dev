@@ -9,7 +9,7 @@
 
     <p>Take a quizz and start learning new things.</p>
 
-    <a href="?url=quizz" class="btn btn-info">Find a quizz</a>
+    <a href="?page=quizz" class="btn btn-info">Find a quizz</a>
 
     <br><br><br><br>
 
@@ -22,7 +22,7 @@
                 <div class="card-body text-secondary">
                     <h5 class="card-title"><?php echo $full_name; ?></h5>
                     <p class="card-text"><?php echo $bdd_account->email; ?></p>
-                    <a href="?url=account" class="btn btn-outline-secondary">Manage account</a>
+                    <a href="?page=account" class="btn btn-outline-secondary">Manage account</a>
                 </div>
             </div>
         </div>

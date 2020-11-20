@@ -9,7 +9,7 @@
                     <h5 class="card-title"><?php echo $account->getFullname(); ?></h5>
                     <p class="card-text"><b>Username :</b> <?php echo $account->username; ?><br><b>Email :</b> <?php echo $account->email; ?><br><b>Last connexion :</b> <?php echo formatDate($account->last_connexion); ?></p>
 
-                    <a href="?url=logout" class="btn btn-danger">Logout</a>
+                    <a href="?page=logout" class="btn btn-danger">Logout</a>
                 </div>
             </div>
         </div>
@@ -35,8 +35,8 @@
                 ?>
             <tr>
                 <th><?php echo $i; ?></th>
-                <td><a href="?url=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
-                <td><a href="?url=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
+                <td><a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
+                <td><a href="?page=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
             </tr>
             <?php } ?>

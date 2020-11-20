@@ -4,7 +4,7 @@ $meta_title = "Login";
 
 // redirect to account if user is connected
 if (isset($_SESSION['user_id'])) {
-    header('Location: ?url=account');
+    header('Location: ?page=account');
     die();
 }
 
@@ -34,7 +34,7 @@ if (isset($_POST['form-login'])) {
             } else {
                 $next = 'account';
             }
-            header('Location: ?url='. $next);
+            header('Location: ?page='. $next);
             die();
         }
         else {

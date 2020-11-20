@@ -10,15 +10,15 @@ require_once ('../php/models/Answer.php');
 require_once ('../php/models/AccountAnswer.php');
 
 
-$url = '';
+$page = '';
 $params = [];
 
 // verify if parameter url is provided
-if (isset($_GET['url'])) {
-    $url = htmlspecialchars($_GET['url']);
-    unset($_GET['url']);
+if (isset($_GET['page'])) {
+    $page = htmlspecialchars($_GET['page']);
+    unset($_GET['page']);
 } else {
-    $url = htmlspecialchars($_SERVER['REQUEST_URI']);
+    $page = htmlspecialchars($_SERVER['REQUEST_URI']);
 }
 
 // handle parameters
@@ -29,7 +29,7 @@ if (count($_GET) > 0) {
 }
 
 // remove slashes at beginning and end of url
-$url = filter_var(ltrim(rtrim($url, '/'), '/'), FILTER_SANITIZE_URL);
+$page = filter_var(ltrim(rtrim($page, '/'), '/'), FILTER_SANITIZE_URL);
 
 
 // test if user connected
@@ -40,20 +40,20 @@ if (isset($_SESSION['user_id'])) {
 
 
 // set controller according to url
-if (in_array($url, ['', 'home'])) {
+if (in_array($page, ['', 'home'])) {
     $controller = 'home';
 }
-else if ($url == 'login') {
+else if ($page == 'login') {
     $controller = 'login';
 }
 // test if controller exist
-else if (file_exists('../php/controllers/'. $url .'.php')) {
+else if (file_exists('../php/controllers/'. $page .'.php')) {
 
     // test if user connected
     if (isset($account)) {
-        $controller = $url;
+        $controller = $page;
     } else {
-        header('Location: ?url=login&next='. $url);
+        header('Location: ?page=login&next='. $page);
         die();
     }
 }

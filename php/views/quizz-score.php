@@ -12,8 +12,8 @@
     <div class="alert alert-<?php echo Quizz::getScoreType($score); ?>" role="alert">
         <h4><?php echo Quizz::getScoreMessage($score); ?></h4>
         <p>Score : <?php echo $score .'/10'; ?></p>
-        <a href="?url=quizz-questions&quizz=<?php echo $quizz->name; ?>" type="button" class="btn btn-outline-<?php echo Quizz::getScoreType($score); ?>">Try again</a>
-        <a href="?url=quizz" type="button" class="btn btn-<?php echo Quizz::getScoreType($score); ?>">Find another quizz</a>
+        <a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" type="button" class="btn btn-outline-<?php echo Quizz::getScoreType($score); ?>">Try again</a>
+        <a href="?page=quizz" type="button" class="btn btn-<?php echo Quizz::getScoreType($score); ?>">Find another quizz</a>
     </div>
 
 </div>

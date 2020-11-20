@@ -2,7 +2,7 @@
 
 // verify if date wis provided
 if (!isset($_GET['date']) || empty($_GET['date'])) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 

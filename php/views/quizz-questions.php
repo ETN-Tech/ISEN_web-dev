@@ -9,7 +9,7 @@
 
 <div class="content">
 
-    <form method="post" action="?url=quizz-correction" class="needs-validation" novalidate>
+    <form method="post" action="?page=quizz-correction" class="needs-validation" novalidate>
 
         <fieldset>
 
