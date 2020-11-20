@@ -18,9 +18,9 @@
                 $answers = $question->getAnswers();
                 ?>
 
-            <div class="form-group">
+            <div class="form-group pb-4">
 
-                <label for="<?php echo $question->id; ?>"><?php echo $question->id .'. '. $question->question; ?></label><br>
+                <label class="d-block" for="<?php echo $question->id; ?>"><?php echo $question->id .'. '. $question->question; ?></label>
 
                 <?php
                 if ($question->type == 'input') {
@@ -53,7 +53,7 @@
 
                 <div class="invalid-feedback">Please answer the question.</div>
 
-            </div><br>
+            </div>
 
             <?php } ?>
 
@@ -61,7 +61,7 @@
 
         <input type="hidden" name="quizz-name" value="<?php echo $quizz->name; ?>">
 
-        <input class="btn btn-info" type="submit" name="form-quizz" value="Send">
+        <input class="btn btn-info" type="submit" name="form-quizz" value="Send answers">
     </form>
 </div>
 
