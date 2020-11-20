@@ -40,10 +40,14 @@ class AccountAnswer {
     }
 
     public function insertBdd() {
-        global $bdd;
+        if (!empty($this->account_id) && !empty($this->answer_id) && !empty($this->date)) {
+            global $bdd;
 
-        $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
-        $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
+            $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
+            $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
+        } else {
+            throw new Exception("Can't insert AccountAnswer with empty parameters in bdd");
+        }
     }
 
     public static function deleteBdd($date) {
