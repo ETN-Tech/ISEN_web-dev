@@ -8,18 +8,17 @@ if (!isset($_GET['date']) || empty($_GET['date'])) {
 
 $date = htmlspecialchars($_GET['date']);
 
+$meta_title = "Working...";
+
 // verify account own this quizz result
 if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
     header('Location: ?page=quizz');
     die();
 }
 
-$quizz = Quizz::getQuizzByAccountAnswerDate($date);
+// delete result from bdd
+AccountAnswer::deleteBdd($date);
 
-$meta_title = "Quizz ". $quizz->title ." score";
-
-$score = $quizz->calculateScore($date);
-
-
-require_once ('../php/views/quizz-score.php');
+header('Location: ?page=account');
+die();
 
