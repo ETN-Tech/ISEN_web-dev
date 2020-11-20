@@ -39,11 +39,11 @@ class AccountAnswer {
         }
     }
 
-    public static function insertBdd($account_id, $answer_id, $date) {
+    public function insertBdd() {
         global $bdd;
 
         $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
-        $ins_account_answer->execute(array($account_id, $answer_id, $date));
+        $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
     }
 
     public static function deleteBdd($date) {
