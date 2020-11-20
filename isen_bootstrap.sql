@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 06 nov. 2020 à 17:46
+-- Généré le : ven. 20 nov. 2020 à 21:58
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.1
 
@@ -85,7 +85,24 @@ INSERT INTO `answer` (`id`, `question_id`, `answer`, `is_correct`) VALUES
 (14, 2, '30', 1),
 (15, 2, '50', 0),
 (16, 2, '70', 0),
-(17, 4, 'Kit', 1);
+(17, 4, 'Kit', 1),
+(18, 12, '1923', 0),
+(19, 12, '1938', 0),
+(20, 12, '1917', 0),
+(21, 12, '1914', 1),
+(22, 13, 'Dallas', 1),
+(23, 14, 'Bull Halsey', 0),
+(24, 14, 'George Patton', 0),
+(25, 14, 'Douglas MacArthur', 1),
+(26, 14, 'Omar Bradley', 0),
+(27, 15, 'France', 1),
+(28, 15, 'Italy', 0),
+(29, 15, 'Carthage', 0),
+(30, 15, 'England', 1),
+(31, 16, 'Magellan', 0),
+(32, 16, 'Cook', 0),
+(33, 16, 'Marco Polo', 1),
+(34, 16, 'Sir Francis Drake', 0);
 
 -- --------------------------------------------------------
 
@@ -109,7 +126,12 @@ INSERT INTO `question` (`id`, `quizz_id`, `type`, `question`) VALUES
 (2, 1, 'select', 'How many pounds does the trumpeter swan—North America’s largest waterfowl—weighs ?'),
 (3, 1, 'checkbox', 'Which of the following animals are noctural ?'),
 (4, 1, 'input', 'What is a baby rabbit called?'),
-(5, 1, 'radio', 'An ant says, “Danger ahead!” by doing what?');
+(5, 1, 'radio', 'An ant says, “Danger ahead!” by doing what?'),
+(12, 2, 'radio', 'World War I began in which year ? '),
+(13, 2, 'input', 'In which city was F. Kennedy assassinated ?'),
+(14, 2, 'select', 'Which general famously stated \'I shall return\' ?'),
+(15, 2, 'checkbox', 'Between which countries was The Hundred Years War fought ? '),
+(16, 2, 'radio', 'Who was the first Western explorer to reach China? ');
 
 -- --------------------------------------------------------
 
@@ -130,7 +152,8 @@ CREATE TABLE `quizz` (
 --
 
 INSERT INTO `quizz` (`id`, `name`, `title`, `description`, `img_url`) VALUES
-(1, 'animals', 'Animals', 'How much do you know about the animal kingdom ?', 'https://cdn.images.express.co.uk/img/dynamic/128/590x/africa-animals-677711.jpg');
+(1, 'animals', 'Animals', 'How much do you know about the animal kingdom ?', 'https://cdn.images.express.co.uk/img/dynamic/128/590x/africa-animals-677711.jpg'),
+(2, 'world-history', 'World History', 'Do you have enough knowledge of world history ? If so, then this quiz is definitely for you !', 'https://cdn.searchenginejournal.com/wp-content/uploads/2017/05/SEJ-PRT-Depositphotos-Featured_Image.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -198,19 +221,19 @@ ALTER TABLE `account_answer`
 -- AUTO_INCREMENT pour la table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `quizz`
 --
 ALTER TABLE `quizz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
