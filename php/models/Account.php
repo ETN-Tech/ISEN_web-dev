@@ -62,6 +62,29 @@ class Account {
         }
     }
 
+    public static function getAccountByAccountAnswerDate($date) {
+        global $bdd;
+
+        $get_account = $bdd->prepare("SELECT * FROM account_answer INNER JOIN account ON account_answer.account_id = account.id WHERE date = ?");
+        $get_account->execute(array($date));
+
+        $bdd_account = $get_account->fetch();
+
+        if ($bdd_account) {
+            return new Account(
+                $bdd_account['id'],
+                $bdd_account['username'],
+                $bdd_account['password_hash'],
+                $bdd_account['name'],
+                $bdd_account['surname'],
+                $bdd_account['email'],
+                $bdd_account['last_connexion']
+            );
+        } else {
+            return false;
+        }
+    }
+
     // check password
     public function verifyPassword($password) {
         if (password_verify($password, $this->password_hash)) {
