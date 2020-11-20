@@ -16,7 +16,7 @@ if (!Quizz::quizzExistByName($quizz_name)) {
 
 
 // get the quizz with the name
-$quizz = new Quizz(null, $quizz_name);
+$quizz = Quizz::getQuizzByName($quizz_name);
 
 // get quizz questions
 $questions = $quizz->getQuestions();
@@ -54,7 +54,7 @@ foreach($questions as $question) {
         // verify user answer
         if (strtolower($answer->answer) == trim(strtolower($user_answer))) {
             $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-            $answer->createAccountAnswer();
+            $answer->insertAccountAnswer();
         }
     }
     // if question type is checkbox
@@ -67,7 +67,7 @@ foreach($questions as $question) {
             // check if user ticked this proposition
             if (isset($_POST[$proposition_id])) {
                 $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-                $answer->createAccountAnswer();
+                $answer->insertAccountAnswer();
             }
         }
     }
@@ -80,7 +80,7 @@ foreach($questions as $question) {
             // check if it's user's answer
             if ($user_answer == $answer->id) {
                 $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-                $answer->createAccountAnswer();
+                $answer->insertAccountAnswer();
                 break;
             }
         }

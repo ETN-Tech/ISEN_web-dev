@@ -16,7 +16,7 @@ if (!Quizz::quizzExistByName($quizz_name)) {
 }
 
 // get the quizz with the name
-$quizz = new Quizz(null, $quizz_name);
+$quizz = Quizz::getQuizzByName($quizz_name);
 
 $meta_title = "Quizz ". $quizz->title;
 

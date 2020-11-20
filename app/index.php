@@ -34,8 +34,7 @@ $page = filter_var(ltrim(rtrim($page, '/'), '/'), FILTER_SANITIZE_URL);
 
 // test if user connected
 if (isset($_SESSION['user_id'])) {
-    $account = new Account();
-    $account->getAccountById($_SESSION['user_id']);
+    $account = Account::getAccountById($_SESSION['user_id']);
 }
 
 

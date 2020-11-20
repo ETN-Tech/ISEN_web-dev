@@ -17,8 +17,7 @@ if (isset($_POST['form-login'])) {
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
         
-        $bdd_account = new Account();
-        $bdd_account->getAccountByUsername($username);
+        $bdd_account = Account::getAccountByUsername($username);
         
         // vérifier le mot de passe
         if ($bdd_account->verifyPassword($password)) {

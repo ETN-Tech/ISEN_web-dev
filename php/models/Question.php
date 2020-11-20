@@ -5,6 +5,7 @@ class Question {
     public $type;
     public $question;
 
+
     // Question constructor
     public function __construct($id, $type, $question) {
         $this->id = $id;

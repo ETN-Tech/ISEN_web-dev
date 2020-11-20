@@ -39,7 +39,7 @@ class AccountAnswer {
         }
     }
 
-    public function createAccountAnswer() {
+    public function insertAccountAnswer() {
         global $bdd;
 
         $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
