@@ -85,6 +85,22 @@ class Account {
         }
     }
 
+    // check if username exist
+    public static function accountExistByUsername($username) {
+        global $bdd;
+
+        $get_account = $bdd->prepare("SELECT id FROM account WHERE username = ?");
+        $get_account->execute(array($username));
+
+        $account = $get_account->fetch();
+
+        if ($account) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // check password
     public function verifyPassword($password) {
         if (password_verify($password, $this->password_hash)) {
@@ -100,5 +116,16 @@ class Account {
 
         $upd_bdd = $bdd->prepare('UPDATE account SET last_connexion = NOW() WHERE id = ?');
         $upd_bdd->execute(array($this->id));
+    }
+
+    public function insertBdd() {
+        if (!empty($this->username) && !empty($this->password_hash) && !empty($this->name) && !empty($this->surname) && !empty($this->email)) {
+            global $bdd;
+
+            $ins_account_answer = $bdd->prepare("INSERT INTO acccount (username, password_hash, name, surname, email) VALUES (?, ?, ?, ?, ?)");
+            $ins_account_answer->execute(array($this->username, $this->password_hash, $this->name, $this->surname, $this->email));
+        } else {
+            throw new Exception("Can't insert Account with empty parameters in bdd");
+        }
     }
 }

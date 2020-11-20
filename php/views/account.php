@@ -46,7 +46,7 @@
                 <td><a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
                 <td><a href="?page=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
-                <td><a href="?page=quizz-score-delete&date=<?php echo $date; ?>" class="btn btn-danger">Delete</a></td>
+                <td><a href="?page=quizz-score-delete&date=<?php echo $date; ?>" class="btn btn-outline-danger">Delete</a></td>
             </tr>
             <?php } ?>
         </tbody>
