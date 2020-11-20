@@ -2,7 +2,7 @@
 
 // verify if quizz-name is set
 if (!isset($_POST['quizz-name']) || empty($_POST['quizz-name'])) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
@@ -10,13 +10,13 @@ $quizz_name = htmlspecialchars($_POST['quizz-name']);
 
 // verify if the quizz exists
 if (!Quizz::quizzExistByName($quizz_name)) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
 
 // get the quizz with the name
-$quizz = new Quizz(null, $quizz_name);
+$quizz = Quizz::getQuizzByName($quizz_name);
 
 // get quizz questions
 $questions = $quizz->getQuestions();
@@ -54,7 +54,7 @@ foreach($questions as $question) {
         // verify user answer
         if (strtolower($answer->answer) == trim(strtolower($user_answer))) {
             $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-            $answer->createAccountAnswer();
+            $answer->insertBdd();
         }
     }
     // if question type is checkbox
@@ -67,7 +67,7 @@ foreach($questions as $question) {
             // check if user ticked this proposition
             if (isset($_POST[$proposition_id])) {
                 $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-                $answer->createAccountAnswer();
+                $answer->insertBdd();
             }
         }
     }
@@ -80,7 +80,7 @@ foreach($questions as $question) {
             // check if it's user's answer
             if ($user_answer == $answer->id) {
                 $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
-                $answer->createAccountAnswer();
+                $answer->insertBdd();
                 break;
             }
         }
@@ -88,5 +88,5 @@ foreach($questions as $question) {
 }
 
 // redirect to quizz-score
-header('Location: ?url=quizz-score&date='. $date);
+header('Location: ?page=quizz-score&date='. $date);
 

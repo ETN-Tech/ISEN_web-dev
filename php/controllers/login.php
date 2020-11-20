@@ -4,7 +4,7 @@ $meta_title = "Login";
 
 // redirect to account if user is connected
 if (isset($_SESSION['user_id'])) {
-    header('Location: ?url=account');
+    header('Location: ?page=account');
     die();
 }
 
@@ -17,8 +17,7 @@ if (isset($_POST['form-login'])) {
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
         
-        $bdd_account = new Account();
-        $bdd_account->getAccountByUsername($username);
+        $bdd_account = Account::getAccountByUsername($username);
         
         // vérifier le mot de passe
         if ($bdd_account->verifyPassword($password)) {
@@ -34,7 +33,7 @@ if (isset($_POST['form-login'])) {
             } else {
                 $next = 'account';
             }
-            header('Location: ?url='. $next);
+            header('Location: ?page='. $next);
             die();
         }
         else {

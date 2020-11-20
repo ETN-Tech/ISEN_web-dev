@@ -6,5 +6,5 @@ $meta_title = "Logout";
 unset($_SESSION['user_id']);
 session_destroy();
 
-header('Location: ?url=login');
+header('Location: ?page=login');
 die();

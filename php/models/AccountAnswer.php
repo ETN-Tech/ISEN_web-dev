@@ -18,7 +18,7 @@ class AccountAnswer {
     public static function getAccountAnswerDatesByAccount($account_id) {
         global $bdd;
 
-        $get_account_answers = $bdd->prepare("SELECT account_answer.date FROM account_answer WHERE account_id = ? GROUP BY account_answer.date");
+        $get_account_answers = $bdd->prepare("SELECT date FROM account_answer WHERE account_id = ? GROUP BY date ORDER BY date DESC");
         $get_account_answers->execute(array($account_id));
 
         return $get_account_answers->fetchAll(PDO::FETCH_COLUMN);
@@ -39,10 +39,21 @@ class AccountAnswer {
         }
     }
 
-    public function createAccountAnswer() {
+    public function insertBdd() {
+        if (!empty($this->account_id) && !empty($this->answer_id) && !empty($this->date)) {
+            global $bdd;
+
+            $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
+            $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
+        } else {
+            throw new Exception("Can't insert AccountAnswer with empty parameters in bdd");
+        }
+    }
+
+    public static function deleteBdd($date) {
         global $bdd;
 
-        $ins_account_answer = $bdd->prepare("INSERT INTO account_answer (account_id, answer_id, date) VALUES (?, ?, ?)");
-        $ins_account_answer->execute(array($this->account_id, $this->answer_id, $this->date));
+        $del_account_answer = $bdd->prepare("DELETE FROM account_answer WHERE date = ?");
+        $del_account_answer->execute(array($date));
     }
 }

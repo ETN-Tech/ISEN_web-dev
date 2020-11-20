@@ -17,9 +17,9 @@
             </div>
             <div class="header-menu container">
                 <div class="row justify-content-md-center">
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=home">Home</a></div>
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=quizz">Quizz</a></div>
-                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?url=account">Account</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?page=home">Home</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?page=quizz">Quizz</a></div>
+                    <div class="col col-lg-2"><a class="btn btn-outline-light" href="?page=account">Account</a></div>
                 </div>
             </div>
         </header>

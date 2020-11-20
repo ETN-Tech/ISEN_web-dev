@@ -2,7 +2,7 @@
 
 // verify if quizz page requested
 if (!isset($_GET['quizz']) || empty($_GET['quizz'])) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
@@ -11,17 +11,18 @@ $quizz_name = htmlspecialchars($_GET['quizz']);
 
 // verify if the quizz exists
 if (!Quizz::quizzExistByName($quizz_name)) {
-    header('Location: ?url=quizz');
+    header('Location: ?page=quizz');
     die();
 }
 
 // get the quizz with the name
-$quizz = new Quizz(null, $quizz_name);
+$quizz = Quizz::getQuizzByName($quizz_name);
 
 $meta_title = "Quizz ". $quizz->title;
 
 // get quizz questions
 $questions = $quizz->getQuestions();
+$i = 0;
 
 
 // view quizz questions page

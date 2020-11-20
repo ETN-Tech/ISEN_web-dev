@@ -7,37 +7,62 @@ class Quizz {
     public $description;
     public $img_url;
 
+
     // Quizz constructor
-    public function __construct($id = null, $name = null) {
+    public function __construct($id, $name, $title, $description, $img_url)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->title = $title;
+        $this->description = $description;
+        $this->img_url = $img_url;
+    }
 
-        // detect if either id or name provided
-        if ($id != null || $name != null) {
-            global $bdd;
 
-            // generate fields key and value for bdd selection
-            $key = ($id != null) ? 'id' : 'name';
-            $value = ($id != null) ? $id : $name;
+    // get quizz by id
+    public static function getQuizzById($id) {
+        return Quizz::executeGetQuizzBy('id', $id);
+    }
 
-            $get_quizz = $bdd->prepare('SELECT * FROM quizz WHERE '. $key .' = ?');
-            $get_quizz->execute(array($value));
+    // get quizz by name
+    public static function getQuizzByName($name) {
+        return Quizz::executeGetQuizzBy('name', $name);
+    }
 
-            $quizz = $get_quizz->fetch();
+    // execute a request get by
+    private static function executeGetQuizzBy($key, $value) {
+        global $bdd;
 
-            if ($quizz) {
-                $this->id = $quizz['id'];
-                $this->name = $quizz['name'];
-                $this->title = $quizz['title'];
-                $this->description = $quizz['description'];
-                $this->img_url = $quizz['img_url'];
-                return true;
-            } else {
-                return false;
-            }
+        $get_quizz = $bdd->prepare('SELECT * FROM quizz WHERE '. $key .' = ?');
+        $get_quizz->execute(array($value));
+
+        $quizz = $get_quizz->fetch();
+
+        if ($quizz) {
+            return new Quizz(
+                $quizz['id'],
+                $quizz['name'],
+                $quizz['title'],
+                $quizz['description'],
+                $quizz['img_url']
+            );
         } else {
-            throw new Exception("Quizz constructor requires id or name");
+            return false;
         }
     }
 
+    public static function getQuizzByAccountAnswerDate($date) {
+        global $bdd;
+
+        $get_quizz = $bdd->prepare("SELECT quizz.id FROM quizz INNER JOIN question ON quizz.id = question.quizz_id INNER JOIN answer ON question.id = answer.question_id INNER JOIN account_answer ON answer.id = account_answer.answer_id WHERE account_answer.date = ?");
+        $get_quizz->execute(array($date));
+
+        $quizz_id = $get_quizz->fetch()[0];
+
+        $quizz = Quizz::getQuizzById($quizz_id);
+
+        return $quizz;
+    }
 
     // get all quizzes infos and return them
     public static function getQuizzes() {
@@ -50,25 +75,12 @@ class Quizz {
 
         // create Quizz objects for each quizz
         foreach ($bdd_quizzes as $bdd_quizz) {
-            $quizz = new Quizz($bdd_quizz['id']);
+            $quizz = Quizz::getQuizzById($bdd_quizz['id']);
 
             // add object to return table
             array_push($quizzes, $quizz);
         }
         return $quizzes;
-    }
-
-    public static function getQuizzByAccountAnswerDate($date) {
-        global $bdd;
-
-        $get_quizz = $bdd->prepare("SELECT quizz.id FROM quizz INNER JOIN question ON quizz.id = question.quizz_id INNER JOIN answer ON question.id = answer.question_id INNER JOIN account_answer ON answer.id = account_answer.answer_id WHERE account_answer.date = ?");
-        $get_quizz->execute(array($date));
-
-        $quizz_id = $get_quizz->fetch()[0];
-
-        $quizz = new Quizz($quizz_id, null);
-
-        return $quizz;
     }
 
     // find if quizz exist in bdd
