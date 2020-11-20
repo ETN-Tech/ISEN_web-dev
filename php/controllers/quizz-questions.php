@@ -22,6 +22,7 @@ $meta_title = "Quizz ". $quizz->title;
 
 // get quizz questions
 $questions = $quizz->getQuestions();
+$i = 0;
 
 
 // view quizz questions page

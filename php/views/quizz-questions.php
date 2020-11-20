@@ -15,12 +15,13 @@
 
             <?php
             foreach($questions as $question) {
+                $i++;
                 $answers = $question->getAnswers();
                 ?>
 
             <div class="form-group pb-4">
 
-                <label class="d-block" for="<?php echo $question->id; ?>"><?php echo $question->id .'. '. $question->question; ?></label>
+                <label class="d-block" for="<?php echo $question->id; ?>"><?php echo $i .'. '. $question->question; ?></label>
 
                 <?php
                 if ($question->type == 'input') {
@@ -65,4 +66,4 @@
     </form>
 </div>
 
-<script type="application/javascript" src="js/quizz-validate.js"></script>
+<script type="application/javascript" src="js/form-validate.js"></script>
