@@ -40,7 +40,6 @@
             foreach ($account_answer_dates as $date) {
                 $quizz = Quizz::getQuizzByAccountAnswerDate($date);
                 $score = $quizz->calculateScore($date);
-                $i++;
                 ?>
             <tr>
                 <td><a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
