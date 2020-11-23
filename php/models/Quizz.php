@@ -127,9 +127,9 @@ class Quizz {
 
         $questions = $this->getQuestions();
 
-        // initialize variables
+        // initialize correction variables
         $base_score = 10 / count($questions);
-        $score = count($questions) * $base_score;
+        $score = 10;
 
         // verify answers
         foreach ($questions as $question) {

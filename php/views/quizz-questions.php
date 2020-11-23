@@ -15,8 +15,12 @@
 
             <?php
             foreach($questions as $question) {
-                $i++;
                 $answers = $question->getAnswers();
+                // if user already answered quizz, shuffle answers
+                if (isset($already_answered)) {
+                    shuffle($answers);
+                }
+                $i++;
                 ?>
 
             <div class="form-group pb-4">

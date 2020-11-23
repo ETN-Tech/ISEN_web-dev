@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <h3 id="last-scores" class="mb-3">My quizz scores</h3>
+    <h3 id="my-scores" class="mb-3">My quizz scores</h3>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
