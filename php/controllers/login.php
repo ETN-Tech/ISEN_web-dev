@@ -18,25 +18,29 @@ if (isset($_POST['form-login'])) {
         $password = htmlspecialchars($_POST['password']);
         
         $bdd_account = Account::getAccountByUsername($username);
-        
-        // vérifier le mot de passe
-        if ($bdd_account->verifyPassword($password)) {
-            // création de la session de connexion
-            $_SESSION['user_id'] = $bdd_account->id;
 
-            // mettre a jour la date de connexion
-            $bdd_account->updateLastConnexion();
+        // vérifier si le compte existe
+        if ($bdd_account) {
+            // vérifier le mot de passe
+            if ($bdd_account->verifyPassword($password)) {
+                // création de la session de connexion
+                $_SESSION['user_id'] = $bdd_account->id;
 
-            // handle redirection
-            if (isset($_GET['next'])) {
-                $next = htmlspecialchars($_GET['next']);
+                // mettre a jour la date de connexion
+                $bdd_account->updateLastConnexion();
+
+                // handle redirection
+                if (isset($_GET['next'])) {
+                    $next = htmlspecialchars($_GET['next']);
+                } else {
+                    $next = 'account';
+                }
+                header('Location: ?page=' . $next);
+                die();
             } else {
-                $next = 'account';
+                $error = "Username or password incorrect";
             }
-            header('Location: ?page='. $next);
-            die();
-        }
-        else {
+        } else {
             $error = "Username or password incorrect";
         }
     }
