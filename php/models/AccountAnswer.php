@@ -24,13 +24,22 @@ class AccountAnswer {
         return $get_account_answers->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    public static function getAccountAnswerDatesByQuizzId($quizz_id) {
+    public static function getAccountAnswerDatesByQuizz($quizz_id) {
         global $bdd;
 
         $get_account_answers = $bdd->prepare("SELECT aa.date FROM account_answer as aa INNER JOIN answer ON aa.answer_id = answer.id INNER JOIN question ON answer.question_id = question.id INNER JOIN quizz ON question.quizz_id = quizz.id WHERE quizz.id = ? GROUP BY aa.date ORDER BY aa.date DESC");
         $get_account_answers->execute(array($quizz_id));
 
         return $get_account_answers->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public static function getNbAccountAnswersByQuizzAccount($quizz_id, $account_id) {
+        global $bdd;
+
+        $get_account_answer = $bdd->prepare("SELECT DISTINCT date FROM account_answer as aa INNER JOIN answer ON aa.answer_id = answer.id INNER JOIN question ON answer.question_id = question.id INNER JOIN quizz ON question.quizz_id = quizz.id WHERE quizz.id = ? AND account_id = ?");
+        $get_account_answer->execute(array($quizz_id, $account_id));
+
+        return $get_account_answer->fetch()[0];
     }
 
     public static function accountAnswerExist($account_id, $answer_id, $date) {

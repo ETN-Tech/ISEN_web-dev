@@ -21,7 +21,7 @@ $quizz = Quizz::getQuizzByName($quizz_name);
 $meta_title = "Results quizz ". $quizz->title;
 
 // get quizz questions
-$results_date = AccountAnswer::getAccountAnswerDatesByQuizzId($quizz->id);
+$results_date = AccountAnswer::getAccountAnswerDatesByQuizz($quizz->id);
 
 
 // view quizz questions page
