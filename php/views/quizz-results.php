@@ -9,13 +9,12 @@
 
 <div class="content">
 
-    <h3 id="last-scores" class="mb-3">Quizz last scores</h3>
+    <h3 id="last-scores" class="mb-3">Last quizz scores</h3>
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>Quizz</th>
-            <th>Score</th>
             <th>Username</th>
+            <th>Score</th>
             <th>Date</th>
         </tr>
         </thead>
@@ -27,9 +26,8 @@
             $account = Account::getAccountByAccountAnswerDate($date);
             ?>
             <tr>
-                <td><a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
-                <td><a href="?page=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo $account->username; ?></td>
+                <td><a href="?page=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
             </tr>
         <?php } ?>
