@@ -39,7 +39,7 @@ class AccountAnswer {
         $get_account_answer = $bdd->prepare("SELECT DISTINCT date FROM account_answer as aa INNER JOIN answer ON aa.answer_id = answer.id INNER JOIN question ON answer.question_id = question.id INNER JOIN quizz ON question.quizz_id = quizz.id WHERE quizz.id = ? AND account_id = ?");
         $get_account_answer->execute(array($quizz_id, $account_id));
 
-        return $get_account_answer->fetch()[0];
+        return $get_account_answer->fetch();
     }
 
     public static function accountAnswerExist($account_id, $answer_id, $date) {
