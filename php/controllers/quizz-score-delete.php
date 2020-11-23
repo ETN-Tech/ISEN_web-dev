@@ -8,7 +8,7 @@ if (!isset($_GET['date']) || empty($_GET['date'])) {
 
 $date = htmlspecialchars($_GET['date']);
 
-$meta_title = "Working...";
+$meta_title = "Quizz answer delete";
 
 // verify account own this quizz result
 if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
@@ -19,6 +19,5 @@ if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
 // delete result from bdd
 AccountAnswer::deleteBdd($date);
 
-header('Location: ?page=account');
-die();
 
+require_once ('../php/views/quizz-score-delete.php');
