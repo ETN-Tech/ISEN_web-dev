@@ -1,9 +1,11 @@
 <div class="content">
+    <a href="/quizz/leaderboard" class="btn btn-warning float-right">See leaderboard</a>
+
     <h2>Quizz</h2>
 
     <p>Choose a quizz to start !</p>
 
-    <div class="row">
+    <div class="row py-4">
         <?php foreach($quizzes as $quizz) { ?>
         <div class="col-sm-4">
            <div class="card">
