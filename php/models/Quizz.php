@@ -1,11 +1,11 @@
 <?php
 
 class Quizz {
-    public $id;
-    public $name;
-    public $title;
-    public $description;
-    public $img_url;
+    private $id;
+    private $name;
+    private $title;
+    private $description;
+    private $img_url;
 
 
     // Quizz constructor
@@ -16,6 +16,33 @@ class Quizz {
         $this->title = $title;
         $this->description = $description;
         $this->img_url = $img_url;
+    }
+
+
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function getImgUrl()
+    {
+        return $this->img_url;
     }
 
 
@@ -138,7 +165,7 @@ class Quizz {
 
             if ($question->type == 'input') {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
-                if (!AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
+                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->id, $date)) {
                     $score -= $base_score;
                 }
             }
@@ -151,13 +178,13 @@ class Quizz {
 
                     if ($answer->is_correct) {
                         // if answer is correct and user didn't check it, loose points
-                        if (!AccountAnswer::accountAnswerExist($account->id, $answer->id, $date)) {
+                        if (!AccountAnswer::accountAnswerExist($account->getId(), $answer->id, $date)) {
                             $score -= $base_score / count($answers);
                         }
                     }
                     else {
                         // if answer is not correct and user checked it, loose points
-                        if (AccountAnswer::accountAnswerExist($account->id, $answer->id, $date)) {
+                        if (AccountAnswer::accountAnswerExist($account->getId(), $answer->id, $date)) {
                             $score -= $base_score / count($answers);
                         }
                     }
@@ -165,7 +192,7 @@ class Quizz {
             }
             else {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
-                if (!AccountAnswer::accountAnswerExist($account->id, $correct_answer->id, $date)) {
+                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->id, $date)) {
                     $score -= $base_score;
                 }
             }

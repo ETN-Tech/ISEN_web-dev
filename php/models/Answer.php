@@ -1,13 +1,13 @@
 <?php
 
 class Answer {
-    public $id;
-    public $answer;
-    public $is_correct;
-    public $form_id;
-    public $name;
-    public $value;
-    public $required;
+    private $id;
+    private $answer;
+    private $is_correct;
+    private $form_id;
+    private $name;
+    private $value;
+    private $required;
 
     // Question constructor
     public function __construct($id, $answer, $is_correct, $form_id, $name, $value, $required) {

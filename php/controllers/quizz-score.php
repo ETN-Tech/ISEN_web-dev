@@ -9,14 +9,14 @@ if (!isset($_GET['date']) || empty($_GET['date'])) {
 $date = htmlspecialchars($_GET['date']);
 
 // verify account own this quizz result
-if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
+if (Account::getAccountByAccountAnswerDate($date)->getId() != $account->getId()) {
     header('Location: /quizz');
     die();
 }
 
 $quizz = Quizz::getQuizzByAccountAnswerDate($date);
 
-$meta_title = "Quizz ". $quizz->title ." score";
+$meta_title = "Quizz ". $quizz->getTitle() ." score";
 
 $score = $quizz->calculateScore($date);
 

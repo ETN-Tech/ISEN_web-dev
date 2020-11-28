@@ -24,7 +24,7 @@ $meta_title = "Quizz ". $quizz->title;
 $questions = $quizz->getQuestions();
 
 // shuffle questions if user already answered this quizz
-if (AccountAnswer::getNbAccountAnswersByQuizzAccount($quizz->id, $account->id) > 1) {
+if (AccountAnswer::getNbAccountAnswersByQuizzAccount($quizz->id, $account->getId()) > 1) {
     shuffle($questions);
     $already_answered = true;
 }

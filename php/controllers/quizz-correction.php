@@ -53,7 +53,7 @@ foreach($questions as $question) {
 
         // verify user answer
         if (strtolower($answer->answer) == trim(strtolower($user_answer))) {
-            $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
+            $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
             $answer->insertBdd();
         }
     }
@@ -66,7 +66,7 @@ foreach($questions as $question) {
 
             // check if user ticked this proposition
             if (isset($_POST[$proposition_id])) {
-                $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
+                $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
                 $answer->insertBdd();
             }
         }
@@ -79,7 +79,7 @@ foreach($questions as $question) {
         foreach ($answers as $answer) {
             // check if it's user's answer
             if ($user_answer == $answer->id) {
-                $answer = new AccountAnswer(null, $account->id, $answer->id, $date);
+                $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
                 $answer->insertBdd();
                 break;
             }

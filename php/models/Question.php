@@ -1,9 +1,9 @@
 <?php
 
 class Question {
-    public $id;
-    public $type;
-    public $question;
+    private $id;
+    private $type;
+    private $question;
 
 
     // Question constructor
