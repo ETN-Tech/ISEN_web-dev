@@ -165,7 +165,7 @@ class Quizz {
 
             if ($question->getType() == 'input') {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
-                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->id, $date)) {
+                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->getId(), $date)) {
                     $score -= $base_score;
                 }
             }
@@ -192,7 +192,7 @@ class Quizz {
             }
             else {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
-                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->id, $date)) {
+                if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->getId(), $date)) {
                     $score -= $base_score;
                 }
             }

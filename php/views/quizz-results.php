@@ -26,7 +26,7 @@
             $account = Account::getAccountByAccountAnswerDate($date);
             ?>
             <tr>
-                <td><?php echo $account->username; ?></td>
+                <td><?php echo $account->getUsername(); ?></td>
                 <td><a href="/quizz/score/<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
             </tr>
