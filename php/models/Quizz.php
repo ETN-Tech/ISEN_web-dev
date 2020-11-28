@@ -163,13 +163,13 @@ class Quizz {
             // get correct answers
             $correct_answer = $question->getCorrectAnswers();
 
-            if ($question->type == 'input') {
+            if ($question->getType() == 'input') {
                 // if correct_answer doesn't exist in account_answer, user answered incorrectly
                 if (!AccountAnswer::accountAnswerExist($account->getId(), $correct_answer->id, $date)) {
                     $score -= $base_score;
                 }
             }
-            else if ($question->type == 'checkbox') {
+            else if ($question->getType() == 'checkbox') {
                 // get possible answers
                 $answers = $question->getAnswers();
 

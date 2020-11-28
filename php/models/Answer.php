@@ -19,4 +19,41 @@ class Answer {
         $this->value = $value;
         $this->required = $required;
     }
+
+
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    public function getIsCorrect()
+    {
+        return $this->is_correct;
+    }
+
+    public function getFormId()
+    {
+        return $this->form_id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    public function getRequired()
+    {
+        return $this->required;
+    }
 }

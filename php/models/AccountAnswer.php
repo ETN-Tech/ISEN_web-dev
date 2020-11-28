@@ -5,7 +5,6 @@ class AccountAnswer {
     private $account_id;
     private $answer_id;
     private $date;
-    private $score = 0;
 
     // constructor
     public function __construct($id, $account_id, $answer_id, $date)

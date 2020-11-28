@@ -14,6 +14,23 @@ class Question {
     }
 
 
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+
     // get answers and return them
     public function getAnswers() {
         global $bdd;
