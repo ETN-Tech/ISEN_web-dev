@@ -4,7 +4,7 @@ $meta_title = "Login";
 
 // redirect to account if user is connected
 if (isset($_SESSION['user_id'])) {
-    header('Location: ?page=account');
+    header('Location: /account');
     die();
 }
 
@@ -35,7 +35,7 @@ if (isset($_POST['form-login'])) {
                 } else {
                     $next = 'account';
                 }
-                header('Location: ?page=' . $next);
+                header('Location: /' . $next);
                 die();
             } else {
                 $error = "Username or password incorrect";

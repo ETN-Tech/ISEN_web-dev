@@ -41,7 +41,7 @@
                 <div class="invalid-feedback">Email is required.</div>
             </div>
             <input type="submit" class="btn btn-info" name="form-account-create" value="Create account">
-            <a href="?page=account" class="btn btn-">Cancel</a>
+            <a href="/account" class="btn btn-">Cancel</a>
         </form>
 
     <?php } ?>
