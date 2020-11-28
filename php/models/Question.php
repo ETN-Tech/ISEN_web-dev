@@ -1,9 +1,9 @@
 <?php
 
 class Question {
-    public $id;
-    public $type;
-    public $question;
+    private $id;
+    private $type;
+    private $question;
 
 
     // Question constructor
@@ -11,6 +11,23 @@ class Question {
         $this->id = $id;
         $this->type = $type;
         $this->question = $question;
+    }
+
+
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getQuestion()
+    {
+        return $this->question;
     }
 
 

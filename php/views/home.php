@@ -21,7 +21,7 @@
                     <div class="card-header">Account connected</div>
                     <div class="card-body text-secondary">
                         <h5 class="card-title"><?php echo $full_name; ?></h5>
-                        <p class="card-text"><?php echo $bdd_account->email; ?></p>
+                        <p class="card-text"><?php echo $bdd_account->getEmail(); ?></p>
                         <a href="/account" class="btn btn-outline-secondary">My account</a>
                     </div>
                 </div>

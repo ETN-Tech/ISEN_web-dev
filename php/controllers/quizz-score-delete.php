@@ -11,7 +11,7 @@ $date = htmlspecialchars($_GET['date']);
 $meta_title = "Quizz answer delete";
 
 // verify account own this quizz result
-if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
+if (Account::getAccountByAccountAnswerDate($date)->getId() != $account->getId()) {
     header('Location: /quizz');
     die();
 }

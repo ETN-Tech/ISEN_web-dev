@@ -1,13 +1,13 @@
 <?php
 
 class Account {
-    public $id;
-    public $username;
+    private $id;
+    private $username;
     private $password_hash;
-    public $name;
-    public $surname;
-    public $email;
-    public $last_connexion;
+    private $name;
+    private $surname;
+    private $email;
+    private $last_connexion;
 
 
     // Account constructor
@@ -20,6 +20,36 @@ class Account {
         $this->surname = $surname;
         $this->email = $email;
         $this->last_connexion = $last_connexion;
+    }
+
+    // Getters
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getLastConnexion()
+    {
+        return $this->last_connexion;
     }
 
 

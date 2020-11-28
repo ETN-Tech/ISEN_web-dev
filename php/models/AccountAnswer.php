@@ -1,10 +1,10 @@
 <?php
 
 class AccountAnswer {
-    public $id;
-    public $account_id;
-    public $answer_id;
-    public $date;
+    private $id;
+    private $account_id;
+    private $answer_id;
+    private $date;
 
     // constructor
     public function __construct($id, $account_id, $answer_id, $date)

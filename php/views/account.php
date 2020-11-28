@@ -7,9 +7,9 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $account->getFullname(); ?></h5>
                     <p class="card-text">
-                        <span class="d-block"><b>Username :</b> <?php echo $account->username; ?></span>
-                        <span class="d-block"><b>Email :</b> <?php echo $account->email; ?></span>
-                        <span class="d-block"><b>Last connexion :</b> <?php echo formatDate($account->last_connexion); ?></span>
+                        <span class="d-block"><b>Username :</b> <?php echo $account->getUsername(); ?></span>
+                        <span class="d-block"><b>Email :</b> <?php echo $account->getEmail(); ?></span>
+                        <span class="d-block"><b>Last connexion :</b> <?php echo formatDate($account->getLastConnexion()); ?></span>
                     </p>
                     <a href="/logout" class="btn btn-danger">Logout</a>
                 </div>
@@ -42,7 +42,7 @@
                 $score = $quizz->calculateScore($date);
                 ?>
             <tr>
-                <td><a href="/quizz/questions/<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
+                <td><a href="/quizz/questions/<?php echo $quizz->getName(); ?>" class="text-info"><?php echo $quizz->getTitle(); ?></a></td>
                 <td><a href="/quizz/score/<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
                 <td><a href="/quizz/score/delete/<?php echo $date; ?>" class="btn btn-outline-danger">Delete</a></td>
