@@ -18,13 +18,13 @@ if (!Quizz::quizzExistByName($quizz_name)) {
 // get the quizz with the name
 $quizz = Quizz::getQuizzByName($quizz_name);
 
-$meta_title = "Quizz ". $quizz->title;
+$meta_title = "Quizz ". $quizz->getTitle();
 
 // get quizz questions
 $questions = $quizz->getQuestions();
 
 // shuffle questions if user already answered this quizz
-if (AccountAnswer::getNbAccountAnswersByQuizzAccount($quizz->id, $account->getId()) > 1) {
+if (AccountAnswer::getNbAccountAnswersByQuizzAccount($quizz->getId(), $account->getId()) > 1) {
     shuffle($questions);
     $already_answered = true;
 }

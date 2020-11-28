@@ -25,10 +25,10 @@ $questions = $quizz->getQuestions();
 // check all required questions are answered
 foreach($questions as $question) {
     // if required field
-    if (in_array($question->type, ['input', 'radio', 'select'])) {
+    if (in_array($question->getType(), ['input', 'radio', 'select'])) {
         // test if user answered
-        if (!isset($_POST[$question->id]) || empty($_POST[$question->id])) {
-            array_push($quizz_error, $question->id);
+        if (!isset($_POST[$question->getId()]) || empty($_POST[$question->getId()])) {
+            array_push($quizz_error, $question->getId());
         }
     }
 }
@@ -44,42 +44,42 @@ foreach($questions as $question) {
     $answers = $question->getAnswers();
 
     // if question type is input
-    if ($question->type == 'input') {
+    if ($question->getType() == 'input') {
         // get user answer
-        $user_answer = htmlspecialchars($_POST[$question->id]);
+        $user_answer = htmlspecialchars($_POST[$question->getId()]);
 
         // get first answer
         $answer = $answers[0];
 
         // verify user answer
-        if (strtolower($answer->answer) == trim(strtolower($user_answer))) {
-            $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
+        if (strtolower($answer->getAnswer()) == trim(strtolower($user_answer))) {
+            $answer = new AccountAnswer(null, $account->getId(), $answer->getId(), $date);
             $answer->insertBdd();
         }
     }
     // if question type is checkbox
-    else if ($question->type == 'checkbox') {
+    else if ($question->getType() == 'checkbox') {
 
         // check each possible answer
         foreach ($answers as $answer) {
-            $proposition_id = $question->id . '-' . $answer->id;
+            $proposition_id = $question->getId() . '-' . $answer->getId();
 
             // check if user ticked this proposition
             if (isset($_POST[$proposition_id])) {
-                $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
+                $answer = new AccountAnswer(null, $account->getId(), $answer->getId(), $date);
                 $answer->insertBdd();
             }
         }
     }
     // if question type is radio/select
-    else if (in_array($question->type, ['radio', 'select'])) {
+    else if (in_array($question->getType(), ['radio', 'select'])) {
         // get user answer
-        $user_answer = htmlspecialchars($_POST[$question->id]);
+        $user_answer = htmlspecialchars($_POST[$question->getId()]);
 
         foreach ($answers as $answer) {
             // check if it's user's answer
-            if ($user_answer == $answer->id) {
-                $answer = new AccountAnswer(null, $account->getId(), $answer->id, $date);
+            if ($user_answer == $answer->getId()) {
+                $answer = new AccountAnswer(null, $account->getId(), $answer->getId(), $date);
                 $answer->insertBdd();
                 break;
             }

@@ -176,15 +176,15 @@ class Quizz {
                 // verify for each possible answer
                 foreach ($answers as $answer) {
 
-                    if ($answer->is_correct) {
+                    if ($answer->getIsCorrect()) {
                         // if answer is correct and user didn't check it, loose points
-                        if (!AccountAnswer::accountAnswerExist($account->getId(), $answer->id, $date)) {
+                        if (!AccountAnswer::accountAnswerExist($account->getId(), $answer->getId(), $date)) {
                             $score -= $base_score / count($answers);
                         }
                     }
                     else {
                         // if answer is not correct and user checked it, loose points
-                        if (AccountAnswer::accountAnswerExist($account->getId(), $answer->id, $date)) {
+                        if (AccountAnswer::accountAnswerExist($account->getId(), $answer->getId(), $date)) {
                             $score -= $base_score / count($answers);
                         }
                     }

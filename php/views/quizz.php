@@ -7,12 +7,12 @@
         <?php foreach($quizzes as $quizz) { ?>
         <div class="col-sm-4">
            <div class="card">
-                <img src="<?php echo $quizz->img_url; ?>" alt="<?php echo $quizz->title; ?> quizz" class="card-img-top">
+                <img src="<?php echo $quizz->getImgUrl(); ?>" alt="<?php echo $quizz->getTitle(); ?> quizz" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $quizz->title; ?></h5>
-                    <p class="card-text"><?php echo $quizz->description; ?></p>
-                    <a href="/quizz/questions/<?php echo $quizz->name; ?>" class="btn btn-info">Take the quizz</a>
-                    <a href="/quizz/results/<?php echo $quizz->name; ?>" class="btn btn-outline-info">See scores</a>
+                    <h5 class="card-title"><?php echo $quizz->getTitle(); ?></h5>
+                    <p class="card-text"><?php echo $quizz->getDescription(); ?></p>
+                    <a href="/quizz/questions/<?php echo $quizz->getName(); ?>" class="btn btn-info">Take the quizz</a>
+                    <a href="/quizz/results/<?php echo $quizz->getName(); ?>" class="btn btn-outline-info">See scores</a>
                 </div>
             </div>
         </div>

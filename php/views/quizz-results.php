@@ -1,9 +1,9 @@
 <div class="card border-0 bg-dark text-white text-center">
-    <img src="<?php echo $quizz->img_url; ?>" alt="Quizz <?php echo $quizz->name ?>" class="img-fluid quizz-full-img">
+    <img src="<?php echo $quizz->getImgUrl(); ?>" alt="Quizz <?php echo $quizz->getName() ?>" class="img-fluid quizz-full-img">
     <div class="card-img-overlay align-middle quizz-header-overlay">
-        <h1 class="card-title">Quizz <?php echo $quizz->title ?></h1>
+        <h1 class="card-title">Quizz <?php echo $quizz->getTitle() ?></h1>
 
-        <h5 class="card-text"><?php echo $quizz->description; ?></h5>
+        <h5 class="card-text"><?php echo $quizz->getDescription(); ?></h5>
     </div>
 </div>
 

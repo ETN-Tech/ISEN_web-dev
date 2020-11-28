@@ -18,10 +18,10 @@ if (!Quizz::quizzExistByName($quizz_name)) {
 // get the quizz with the name
 $quizz = Quizz::getQuizzByName($quizz_name);
 
-$meta_title = "Results quizz ". $quizz->title;
+$meta_title = "Results quizz ". $quizz->getTitle();
 
 // get quizz questions
-$results_date = AccountAnswer::getAccountAnswerDatesByQuizz($quizz->id);
+$results_date = AccountAnswer::getAccountAnswerDatesByQuizz($quizz->getId());
 
 
 // view quizz questions page
