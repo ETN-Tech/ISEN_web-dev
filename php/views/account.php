@@ -11,7 +11,7 @@
                         <span class="d-block"><b>Email :</b> <?php echo $account->email; ?></span>
                         <span class="d-block"><b>Last connexion :</b> <?php echo formatDate($account->last_connexion); ?></span>
                     </p>
-                    <a href="?page=logout" class="btn btn-danger">Logout</a>
+                    <a href="/logout" class="btn btn-danger">Logout</a>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-header">Manage accounts</div>
                 <div class="card-body">
-                    <a href="?page=account-create" class="btn btn-info">Create account</a>
+                    <a href="/account/create" class="btn btn-info">Create account</a>
                 </div>
             </div>
         </div>
@@ -42,10 +42,10 @@
                 $score = $quizz->calculateScore($date);
                 ?>
             <tr>
-                <td><a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
-                <td><a href="?page=quizz-score&date=<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
+                <td><a href="/quizz/questions/<?php echo $quizz->name; ?>" class="text-info"><?php echo $quizz->title; ?></a></td>
+                <td><a href="/quizz/score/<?php echo $date; ?>" class="text-<?php echo Quizz::getScoreType($score); ?>"><?php echo $score; ?></a></td>
                 <td><?php echo formatDate($date); ?></td>
-                <td><a href="?page=quizz-score-delete&date=<?php echo $date; ?>" class="btn btn-outline-danger">Delete</a></td>
+                <td><a href="/quizz/score/delete/<?php echo $date; ?>" class="btn btn-outline-danger">Delete</a></td>
             </tr>
             <?php } ?>
         </tbody>

@@ -12,8 +12,8 @@
     <div class="alert alert-<?php echo Quizz::getScoreType($score); ?> mb-4" role="alert">
         <h4><?php echo Quizz::getScoreMessage($score); ?></h4>
         <p>Score : <?php echo $score; ?>/10</p>
-        <a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" type="button" class="btn btn-outline-<?php echo Quizz::getScoreType($score); ?>">Try again</a>
-        <a href="?page=account#my-scores" type="button" class="btn btn-<?php echo Quizz::getScoreType($score); ?>">My scores</a>
-        <a href="?page=quizz-score-delete&date=<?php echo $date; ?>" type="button" class="btn btn-danger float-right">Delete this result</a>
+        <a href="/quizz/questions/<?php echo $quizz->name; ?>" type="button" class="btn btn-outline-<?php echo Quizz::getScoreType($score); ?>">Try again</a>
+        <a href="/account#my-scores" type="button" class="btn btn-<?php echo Quizz::getScoreType($score); ?>">My scores</a>
+        <a href="/quizz/score/delete/<?php echo $date; ?>" type="button" class="btn btn-danger float-right">Delete this result</a>
     </div>
 </div>

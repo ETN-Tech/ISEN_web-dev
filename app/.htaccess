@@ -1,0 +1,22 @@
+# URL Rewritting
+Options +FollowSymlinks
+RewriteEngine on
+
+# Basic url rewritte :
+RewriteRule ^([a-z0-9-]+)/?$ /?page=$1 [NC,L]
+
+# Rewrite login
+RewriteRule ^login/?\?next=(.*)$ /?page=login&next=$1 [NC,L]
+
+# Rewrite quizz
+RewriteRule ^quizz/([a-z0-9-]+)/?$ /?page=quizz-$1 [NC,L]
+RewriteRule ^quizz/score/([0-9-:\ ]+)/?$ /?page=quizz-score&date=$1 [NC,L]
+RewriteRule ^quizz/score/delete/([0-9-:\ ]+)/?$ /?page=quizz-score-delete&date=$1 [NC,L]
+RewriteRule ^quizz/([a-z0-9-]+)/([a-z0-9-]+)/?$ /?page=quizz-$1&quizz=$2 [NC,L]
+
+# Rewrite account
+RewriteRule ^account/([a-z0-9-]+)/?$ /?page=account-$1 [NC,L]
+
+
+# Error page
+ErrorDocument 404 /?page=404

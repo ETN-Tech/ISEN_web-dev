@@ -2,7 +2,7 @@
 
 // verify if date wis provided
 if (!isset($_GET['date']) || empty($_GET['date'])) {
-    header('Location: ?page=quizz');
+    header('Location: /quizz');
     die();
 }
 
@@ -12,7 +12,7 @@ $meta_title = "Quizz answer delete";
 
 // verify account own this quizz result
 if (Account::getAccountByAccountAnswerDate($date)->id != $account->id) {
-    header('Location: ?page=quizz');
+    header('Location: /quizz');
     die();
 }
 

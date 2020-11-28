@@ -11,8 +11,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $quizz->title; ?></h5>
                     <p class="card-text"><?php echo $quizz->description; ?></p>
-                    <a href="?page=quizz-questions&quizz=<?php echo $quizz->name; ?>" class="btn btn-info">Take the quizz</a>
-                    <a href="?page=quizz-results&quizz=<?php echo $quizz->name; ?>" class="btn btn-outline-info">See scores</a>
+                    <a href="/quizz/questions/<?php echo $quizz->name; ?>" class="btn btn-info">Take the quizz</a>
+                    <a href="/quizz/results/<?php echo $quizz->name; ?>" class="btn btn-outline-info">See scores</a>
                 </div>
             </div>
         </div>

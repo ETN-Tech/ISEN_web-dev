@@ -12,7 +12,7 @@
 
             <p>Take a quizz and start learning new things.</p>
 
-            <a href="?page=quizz" class="btn btn-info">Find a quizz</a>
+            <a href="/quizz" class="btn btn-info">Find a quizz</a>
         </div>
 
         <div class="row py-2 mt-2">
@@ -22,7 +22,7 @@
                     <div class="card-body text-secondary">
                         <h5 class="card-title"><?php echo $full_name; ?></h5>
                         <p class="card-text"><?php echo $bdd_account->email; ?></p>
-                        <a href="?page=account" class="btn btn-outline-secondary">My account</a>
+                        <a href="/account" class="btn btn-outline-secondary">My account</a>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <div class="card-header">Account</div>
                     <div class="card-body text-secondary">
                         <p class="card-text">Connect to your account to access all pages.</p>
-                        <a href="?page=login&next=home" class="btn btn-outline-secondary">Login</a></div>
+                        <a href="/login?²next=home" class="btn btn-outline-secondary">Login</a></div>
                 </div>
             </div>
         </div>

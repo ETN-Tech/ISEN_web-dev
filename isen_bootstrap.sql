@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 20 nov. 2020 à 21:58
+-- Généré le : sam. 28 nov. 2020 à 13:42
 -- Version du serveur :  5.7.24
 -- Version de PHP : 7.4.1
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `isen_bootstrap`
 --
+CREATE DATABASE IF NOT EXISTS `isen_bootstrap` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `isen_bootstrap`;
 
 -- --------------------------------------------------------
 
@@ -227,7 +229,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT pour la table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `quizz`

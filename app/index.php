@@ -52,7 +52,7 @@ else if (file_exists('../php/controllers/'. $page .'.php')) {
     if (isset($account)) {
         $controller = $page;
     } else {
-        header('Location: ?page=login&next='. $page);
+        header('Location: /login/?next='. $page);
         die();
     }
 }
