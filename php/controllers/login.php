@@ -24,7 +24,7 @@ if (isset($_POST['form-login'])) {
             // vérifier le mot de passe
             if ($bdd_account->verifyPassword($password)) {
                 // création de la session de connexion
-                $_SESSION['user_id'] = $bdd_account->id;
+                $_SESSION['user_id'] = $bdd_account->getId();
 
                 // mettre a jour la date de connexion
                 $bdd_account->updateLastConnexion();
