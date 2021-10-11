@@ -8,4 +8,6 @@ A simple quizz website.
 - Execute [`database.sql`](database.sql) to populate database
 - Add an admin account
 
+### About
+
 _Project for the web development course_
