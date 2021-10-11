@@ -1,5 +1,11 @@
-# isen_web-dev
+# That quizz
 
-Projet de Technologies Web - ISEN M1
+A simple quizz website.
 
-Rapport: https://yncrea-my.sharepoint.com/:w:/g/personal/etienne_schelfhout_isen_yncrea_fr/EVvmH5hZnKVAloKtzTrKK7YBezgKHuz3-Qqn_t_O2JZeVg?e=VeWWcY
+## Setup
+
+- Create database
+- Execute [`database.sql`](database.sql) to populate database
+- Add an admin account
+
+_Project for the web development course_
